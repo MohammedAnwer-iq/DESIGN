@@ -6,57 +6,50 @@
     <title>Mohammed Fahed | Graphic Designer</title>
     <style>
         :root {
-            --primary: #7c3aed; /* Deep Vibrant Purple */
-            --dark-bg: #020617; /* Pure Black-Blue */
-            --surface: #0f172a; /* Midnight Blue-Black */
-            --card: #1e1b4b; /* Midnight Purple Surface */
+            --primary: #7c3aed; 
+            --dark-bg: #020617; 
+            --surface: #0f172a; 
+            --card: #1e1b4b; 
             --text: #f8fafc;
             --accent: #d8b4fe;
         }
 
-        body { font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--text); margin: 0; transition: direction 0.3s; }
-        [lang="ar"] { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--text); margin: 0; }
+        [lang="ar"] { direction: rtl; }
         
         /* Navigation */
         nav { padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; background: rgba(2, 6, 23, 0.95); border-bottom: 1px solid #1e1b4b; position: sticky; top: 0; z-index: 100; }
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); letter-spacing: 2px; }
         .lang-btn { background: var(--surface); color: var(--accent); border: 1px solid var(--primary); padding: 5px 15px; border-radius: 5px; cursor: pointer; }
 
-        /* Hero Section (No Rectangles) */
-        .hero { height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, #2e1065 0%, #020617 70%); }
-        .hero h1 { font-size: 4rem; margin-bottom: 10px; color: white; text-shadow: 0 0 20px rgba(124, 58, 237, 0.5); }
-        .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; }
+        /* Hero */
+        .hero { height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, #2e1065 0%, #020617 70%); }
+        .hero h1 { font-size: 4rem; margin: 0; text-shadow: 0 0 20px rgba(124, 58, 237, 0.5); }
+        .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin: 20px 0; }
 
-        /* Portal UI Controls */
+        /* Portal UI */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; z-index: 1000; }
-        .login-card { background: var(--card); padding: 40px; border-radius: 20px; width: 340px; border: 1px solid var(--primary); box-shadow: 0 0 30px rgba(124, 58, 237, 0.2); }
+        .login-card { background: var(--card); padding: 40px; border-radius: 20px; width: 340px; border: 1px solid var(--primary); }
         input { width: 100%; padding: 12px; margin: 10px 0; background: #020617; border: 1px solid #334155; color: white; border-radius: 8px; box-sizing: border-box; }
-        input:focus { border-color: var(--primary); outline: none; }
         .btn { padding: 12px 25px; border-radius: 10px; border: none; cursor: pointer; font-weight: 600; transition: 0.3s; }
         .btn-p { background: var(--primary); color: white; }
-        .btn-p:hover { background: #6d28d9; box-shadow: 0 0 15px var(--primary); }
 
-        /* Messaging Portal UI */
-        #portal-ui { display: none; height: 100vh; flex-direction: column; background: var(--dark-bg); }
+        #portal-ui { display: none; height: 100vh; flex-direction: column; }
         .portal-header { padding: 15px 5%; background: var(--surface); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--primary); }
-        
         .main-app { display: flex; flex: 1; overflow: hidden; }
         .sidebar { width: 300px; background: #020617; border-right: 1px solid #1e1b4b; display: none; overflow-y: auto; }
-        .user-tab { padding: 20px; border-bottom: 1px solid #1e1b4b; cursor: pointer; transition: 0.2s; }
-        .user-tab:hover { background: #1e1b4b; }
+        .user-tab { padding: 20px; border-bottom: 1px solid #1e1b4b; cursor: pointer; }
         .user-tab.active { background: var(--primary); }
 
-        .chat-view { flex: 1; display: flex; flex-direction: column; }
-        .messages { flex: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); }
-        
-        .bubble { padding: 12px 18px; border-radius: 15px; max-width: 65%; font-size: 0.95rem; }
-        .bubble.client { align-self: flex-end; background: var(--primary); color: white; border-bottom-right-radius: 2px; }
+        .chat-view { flex: 1; display: flex; flex-direction: column; background: #0f131f; }
+        .messages { flex: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .bubble { padding: 12px 18px; border-radius: 15px; max-width: 65%; position: relative; }
+        .bubble.client { align-self: flex-end; background: var(--primary); border-bottom-right-radius: 2px; }
         .bubble.admin { align-self: flex-start; background: var(--surface); border: 1px solid var(--primary); border-bottom-left-radius: 2px; }
-        .file-notif { background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; display: block; margin-top: 5px; color: var(--accent); }
+        .file-notif { display: block; font-size: 0.75rem; color: var(--accent); margin-top: 5px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 5px; }
 
-        .input-area { padding: 20px 5%; background: var(--surface); display: flex; gap: 15px; align-items: center; border-top: 1px solid var(--primary); }
+        .input-area { padding: 20px; background: var(--surface); display: flex; gap: 15px; align-items: center; border-top: 1px solid var(--primary); }
         #file-input { display: none; }
-        .attach-btn { font-size: 1.5rem; cursor: pointer; color: var(--accent); }
     </style>
 </head>
 <body>
@@ -69,78 +62,82 @@
             <button class="btn btn-p" onclick="openLogin()" id="nav-login-btn">Client Portal</button>
         </div>
     </nav>
-
     <section class="hero">
-        <h1 id="hero-title">Creative Vision</h1>
-        <p id="hero-desc">Bespoke graphic design in midnight excellence. Anything you want, crafted for the future.</p>
+        <h1 id="hero-title">Creative Designer</h1>
+        <p id="hero-desc">Midnight excellence in every pixel. Anything you want, designed to perfection.</p>
         <button class="btn btn-p" onclick="openLogin()" id="hero-btn">Start Project</button>
     </section>
 </div>
 
 <div class="modal" id="loginModal">
     <div class="login-card">
-        <h2 id="login-head" style="margin-top:0">Portal Sign In</h2>
+        <h2 id="login-head">Sign In</h2>
         <input type="text" id="username" placeholder="Username">
         <input type="password" id="password" placeholder="Password">
-        <button class="btn btn-p" style="width:100%" onclick="attemptLogin()" id="login-submit">Login</button>
-        <button class="btn" style="width:100%; background:transparent; color:#94a3b8; margin-top:10px" onclick="closeLogin()">Cancel</button>
+        <button class="btn btn-p" style="width:100%" onclick="attemptLogin()">Login</button>
     </div>
 </div>
 
 <div id="portal-ui">
     <header class="portal-header">
-        <span id="portal-user-title" style="font-weight: bold; color:var(--accent)">Project Workspace</span>
-        <button class="btn" style="background:#ef4444; color:white; padding: 5px 15px;" onclick="location.reload()">Logout</button>
+        <span id="portal-user-title">Project Workspace</span>
+        <button class="btn" style="background:#ef4444; color:white;" onclick="location.reload()">Logout</button>
     </header>
     <div class="main-app">
         <aside class="sidebar" id="sidebar"></aside>
         <main class="chat-view">
             <div class="messages" id="msgDisplay"></div>
             <div class="input-area">
-                <label class="attach-btn" for="file-input">⊕</label>
+                <label style="cursor:pointer; font-size:1.5rem;" for="file-input">⊕</label>
                 <input type="file" id="file-input" onchange="handleFileUpload()">
-                <input type="text" id="msgInput" placeholder="Write your requirements..." style="margin:0">
-                <button class="btn btn-p" style="width:120px" onclick="handleSend()" id="send-btn">Send</button>
+                <input type="text" id="msgInput" placeholder="Type..." style="margin:0">
+                <button class="btn btn-p" onclick="handleSend()" id="send-btn">Send</button>
             </div>
         </main>
     </div>
 </div>
 
-<script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCTd1n2hjcKSFLk7Xl8saeRpBS_nfpL9i8",
+        authDomain: "mohammmed-fahad.firebaseapp.com",
+        databaseURL: "https://mohammmed-fahad-default-rtdb.firebaseio.com",
+        projectId: "mohammmed-fahad",
+        storageBucket: "mohammmed-fahad.firebasestorage.app",
+        messagingSenderId: "576848827662",
+        appId: "1:576848827662:web:f6f36ea0ae2d4b95e1335f"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
     let currentLang = 'en';
     let currentUser = "";
     let isAdmin = false;
     let selectedChatUser = "";
-    let chatDB = JSON.parse(localStorage.getItem('mf_midnight_db')) || {};
 
-    const translations = {
-        en: { 
-            heroT: "Creative Vision", heroD: "Bespoke graphic design in midnight excellence. Anything you want, crafted for the future.", 
-            navL: "Client Portal", hire: "Start Project", loginH: "Portal Sign In", send: "Send", lang: "العربية"
-        },
-        ar: { 
-            heroT: "رؤية إبداعية", heroD: "تصميم جرافيك مخصص بامتياز. أي شيء تريده، نصنعه للمستقبل.", 
-            navL: "بوابة العملاء", hire: "ابدأ مشروعك", loginH: "تسجيل الدخول", send: "إرسال", lang: "English"
-        }
+    const t = {
+        en: { heroT: "Creative Designer", heroD: "Midnight excellence. Anything you want, designed to perfection.", navL: "Client Portal", loginH: "Sign In", send: "Send", lang: "العربية" },
+        ar: { heroT: "مصمم جرافيك", heroD: "تميز في التصميم. أي شيء تريده، أصممه لك بإتقان.", navL: "بوابة العملاء", loginH: "دخول", send: "إرسال", lang: "English" }
     };
 
-    function toggleLang() {
+    window.toggleLang = () => {
         currentLang = currentLang === 'en' ? 'ar' : 'en';
         document.getElementById('html-tag').setAttribute('lang', currentLang);
-        const t = translations[currentLang];
-        document.getElementById('hero-title').innerText = t.heroT;
-        document.getElementById('hero-desc').innerText = t.heroD;
-        document.getElementById('nav-login-btn').innerText = t.navL;
-        document.getElementById('hero-btn').innerText = t.hire;
-        document.getElementById('login-head').innerText = t.loginH;
-        document.getElementById('send-btn').innerText = t.send;
-        document.querySelector('.lang-btn').innerText = t.lang;
-    }
+        document.getElementById('hero-title').innerText = t[currentLang].heroT;
+        document.getElementById('hero-desc').innerText = t[currentLang].heroD;
+        document.getElementById('nav-login-btn').innerText = t[currentLang].navL;
+        document.getElementById('login-head').innerText = t[currentLang].loginH;
+        document.getElementById('send-btn').innerText = t[currentLang].send;
+        document.querySelector('.lang-btn').innerText = t[currentLang].lang;
+    };
 
-    function openLogin() { document.getElementById('loginModal').style.display = 'flex'; }
-    function closeLogin() { document.getElementById('loginModal').style.display = 'none'; }
+    window.openLogin = () => document.getElementById('loginModal').style.display = 'flex';
 
-    function attemptLogin() {
+    window.attemptLogin = () => {
         const u = document.getElementById('username').value.trim();
         const p = document.getElementById('password').value;
         if(!u) return;
@@ -151,58 +148,58 @@
         document.getElementById('portal-ui').style.display = 'flex';
         if(isAdmin) {
             document.getElementById('sidebar').style.display = 'block';
-            renderSidebar();
+            listenToAll();
         } else {
             selectedChatUser = currentUser;
-            renderMessages();
+            listenToChat(currentUser);
         }
-    }
+    };
 
-    function renderSidebar() {
-        const side = document.getElementById('sidebar');
-        side.innerHTML = '<div style="padding:20px; font-size:0.7rem; color:var(--accent); letter-spacing:1px">ACTIVE CHATS</div>';
-        Object.keys(chatDB).forEach(user => {
-            const div = document.createElement('div');
-            div.className = `user-tab ${selectedChatUser === user ? 'active' : ''}`;
-            div.innerText = user;
-            div.onclick = () => { selectedChatUser = user; renderSidebar(); renderMessages(); };
-            side.appendChild(div);
+    function listenToAll() {
+        onValue(ref(db, 'chats/'), (snap) => {
+            const side = document.getElementById('sidebar');
+            side.innerHTML = '<div style="padding:20px; color:var(--accent); font-size:0.7rem;">CLIENT CHATS</div>';
+            if(snap.val()) Object.keys(snap.val()).forEach(user => {
+                const div = document.createElement('div');
+                div.className = `user-tab ${selectedChatUser === user ? 'active' : ''}`;
+                div.innerText = user;
+                div.onclick = () => { selectedChatUser = user; listenToChat(user); listenToAll(); };
+                side.appendChild(div);
+            });
         });
     }
 
-    function renderMessages() {
-        const display = document.getElementById('msgDisplay');
-        display.innerHTML = "";
-        const history = chatDB[selectedChatUser] || [];
-        history.forEach(m => {
-            const div = document.createElement('div');
-            div.className = `bubble ${m.sender}`;
-            div.innerHTML = m.isFile ? `${m.text} <span class="file-notif">📄 Attachment Shared</span>` : m.text;
-            display.appendChild(div);
+    function listenToChat(user) {
+        onValue(ref(db, 'chats/' + user), (snap) => {
+            const display = document.getElementById('msgDisplay');
+            display.innerHTML = "";
+            if(snap.val()) Object.values(snap.val()).forEach(m => {
+                const div = document.createElement('div');
+                div.className = `bubble ${m.sender}`;
+                div.innerHTML = m.isFile ? `${m.text} <span class="file-notif">📄 File Shared</span>` : m.text;
+                display.appendChild(div);
+            });
+            display.scrollTop = display.scrollHeight;
         });
-        display.scrollTop = display.scrollHeight;
     }
 
-    function handleSend(isFile = false, fileName = "") {
+    window.handleSend = (isFile = false, fName = "") => {
         const input = document.getElementById('msgInput');
-        const text = isFile ? fileName : input.value.trim();
+        const text = isFile ? fName : input.value.trim();
         if(!text || !selectedChatUser) return;
-        if(!chatDB[selectedChatUser]) chatDB[selectedChatUser] = [];
-        chatDB[selectedChatUser].push({ sender: isAdmin ? 'admin' : 'client', text: text, isFile: isFile });
-        localStorage.setItem('mf_midnight_db', JSON.stringify(chatDB));
+        push(ref(db, 'chats/' + selectedChatUser), {
+            sender: isAdmin ? 'admin' : 'client',
+            text: text,
+            isFile: isFile
+        });
         input.value = "";
-        renderMessages();
-        if(isAdmin) renderSidebar();
-    }
+    };
 
-    function handleFileUpload() {
+    window.handleFileUpload = () => {
         const file = document.getElementById('file-input').files[0];
-        if(file) handleSend(true, file.name);
-    }
-
-    document.getElementById('msgInput').addEventListener("keypress", (e) => {
-        if(e.key === "Enter") handleSend();
-    });
+        if(file) window.handleSend(true, file.name);
+    };
 </script>
 </body>
-</html>
+    </html>
+    
