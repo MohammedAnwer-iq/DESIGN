@@ -1,39 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html-tag">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammed Fahed | Graphic Design Portal</title>
+    <title>Mohammed Fahed | Graphic Designer</title>
     <style>
         :root {
-            --primary: #6366f1; /* Modern Indigo */
-            --bg: #0f172a;
-            --surface: #1e293b;
+            --primary: #7c3aed; /* Deep Vibrant Purple */
+            --dark-bg: #020617; /* Pure Black-Blue */
+            --surface: #0f172a; /* Midnight Blue-Black */
+            --card: #1e1b4b; /* Midnight Purple Surface */
             --text: #f8fafc;
-            --accent: #10b981;
+            --accent: #d8b4fe;
         }
 
-        body { font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; background: var(--bg); color: var(--text); }
+        body { font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--text); margin: 0; transition: direction 0.3s; }
+        [lang="ar"] { direction: rtl; font-family: 'Segoe UI', Tahoma, sans-serif; }
         
         /* Navigation */
-        nav { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        nav { padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; background: rgba(2, 6, 23, 0.95); border-bottom: 1px solid #1e1b4b; position: sticky; top: 0; z-index: 100; }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
+        .lang-btn { background: var(--surface); color: var(--accent); border: 1px solid var(--primary); padding: 5px 15px; border-radius: 5px; cursor: pointer; }
 
-        /* Hero */
-        .hero { text-align: center; padding: 100px 20px; background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%); }
-        .hero h1 { font-size: 3rem; margin-bottom: 10px; }
-        .btn { padding: 12px 30px; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; transition: 0.3s; }
-        .btn-main { background: var(--primary); color: white; }
-        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); }
+        /* Hero Section (No Rectangles) */
+        .hero { height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, #2e1065 0%, #020617 70%); }
+        .hero h1 { font-size: 4rem; margin-bottom: 10px; color: white; text-shadow: 0 0 20px rgba(124, 58, 237, 0.5); }
+        .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; }
 
-        /* Login Modal */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
-        .login-card { background: var(--surface); padding: 40px; border-radius: 16px; width: 100%; max-width: 400px; border: 1px solid #334155; }
-        input { width: 100%; padding: 12px; margin: 10px 0; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 8px; box-sizing: border-box; }
+        /* Portal UI Controls */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; z-index: 1000; }
+        .login-card { background: var(--card); padding: 40px; border-radius: 20px; width: 340px; border: 1px solid var(--primary); box-shadow: 0 0 30px rgba(124, 58, 237, 0.2); }
+        input { width: 100%; padding: 12px; margin: 10px 0; background: #020617; border: 1px solid #334155; color: white; border-radius: 8px; box-sizing: border-box; }
+        input:focus { border-color: var(--primary); outline: none; }
+        .btn { padding: 12px 25px; border-radius: 10px; border: none; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .btn-p { background: var(--primary); color: white; }
+        .btn-p:hover { background: #6d28d9; box-shadow: 0 0 15px var(--primary); }
 
-        /* Messaging System */
-        #portal { display: none; padding: 40px 5%; height: 80vh; }
-        .messenger { display: grid; grid-template-columns: 300px 1fr; background: var(--surface); height: 100%; border-radius: 16px; overflow: hidden; border: 1px solid #334155; }
+        /* Messaging Portal UI */
+        #portal-ui { display: none; height: 100vh; flex-direction: column; background: var(--dark-bg); }
+        .portal-header { padding: 15px 5%; background: var(--surface); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--primary); }
+        
+        .main-app { display: flex; flex: 1; overflow: hidden; }
+        .sidebar { width: 300px; background: #020617; border-right: 1px solid #1e1b4b; display: none; overflow-y: auto; }
+        .user-tab { padding: 20px; border-bottom: 1px solid #1e1b4b; cursor: pointer; transition: 0.2s; }
+        .user-tab:hover { background: #1e1b4b; }
+        .user-tab.active { background: var(--primary); }
+
+        .chat-view { flex: 1; display: flex; flex-direction: column; }
+        .messages { flex: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); }
+        
+        .bubble { padding: 12px 18px; border-radius: 15px; max-width: 65%; font-size: 0.95rem; }
+        .bubble.client { align-self: flex-end; background: var(--primary); color: white; border-bottom-right-radius: 2px; }
+        .bubble.admin { align-self: flex-start; background: var(--surface); border: 1px solid var(--primary); border-bottom-left-radius: 2px; }
+        .file-notif { background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; display: block; margin-top: 5px; color: var(--accent); }
+
+        .input-area { padding: 20px 5%; background: var(--surface); display: flex; gap: 15px; align-items: center; border-top: 1px solid var(--primary); }
+        #file-input { display: none; }
+        .attach-btn { font-size: 1.5rem; cursor: pointer; color: var(--accent); }
+    </style>
+</head>
+<body>
+
+<div id="landing-ui">
+    <nav>
+        <div class="logo">M.FAHED</div>
+        <div>
+            <button class="lang-btn" onclick="toggleLang()">العربية</button>
+            <button class="btn btn-p" onclick="openLogin()" id="nav-login-btn">Client Portal</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1 id="hero-title">Creative Vision</h1>
+        <p id="hero-desc">Bespoke graphic design in midnight excellence. Anything you want, crafted for the future.</p>
+        <button class="btn btn-p" onclick="openLogin()" id="hero-btn">Start Project</button>
+    </section>
+</div>
+
+<div class="modal" id="loginModal">
+    <div class="login-card">
+        <h2 id="login-head" style="margin-top:0">Portal Sign In</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button class="btn btn-p" style="width:100%" onclick="attemptLogin()" id="login-submit">Login</button>
+        <button class="btn" style="width:100%; background:transparent; color:#94a3b8; margin-top:10px" onclick="closeLogin()">Cancel</button>
+    </div>
+</div>
+
+<div id="portal-ui">
+    <header class="portal-header">
+        <span id="portal-user-title" style="font-weight: bold; color:var(--accent)">Project Workspace</span>
+        <button class="btn" style="background:#ef4444; color:white; padding: 5px 15px;" onclick="location.reload()">Logout</button>
+    </header>
+    <div class="main-app">
+        <aside class="sidebar" id="sidebar"></aside>
+        <main class="chat-view">
+            <div class="messages" id="msgDisplay"></div>
+            <div class="input-area">
+                <label class="attach-btn" for="file-input">⊕</label>
+                <input type="file" id="file-input" onchange="handleFileUpload()">
+                <input type="text" id="msgInput" placeholder="Write your requirements..." style="margin:0">
+                <button class="btn btn-p" style="width:120px" onclick="handleSend()" id="send-btn">Send</button>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script>
+    let currentLang = 'en';
+    let currentUser = "";
+    let isAdmin = false;
+    let selectedChatUser = "";
+    let chatDB = JSON.parse(localStorage.getItem('mf_midnight_db')) || {};
+
+    const translations = {
+        en: { 
+            heroT: "Creative Vision", heroD: "Bespoke graphic design in midnight excellence. Anything you want, crafted for the future.", 
+            navL: "Client Portal", hire: "Start Project", loginH: "Portal Sign In", send: "Send", lang: "العربية"
+        },
+        ar: { 
+            heroT: "رؤية إبداعية", heroD: "تصميم جرافيك مخصص بامتياز. أي شيء تريده، نصنعه للمستقبل.", 
+            navL: "بوابة العملاء", hire: "ابدأ مشروعك", loginH: "تسجيل الدخول", send: "إرسال", lang: "English"
+        }
+    };
+
+    function toggleLang() {
+        currentLang = currentLang === 'en' ? 'ar' : 'en';
+        document.getElementById('html-tag').setAttribute('lang', currentLang);
+        const t = translations[currentLang];
+        document.getElementById('hero-title').innerText = t.heroT;
+        document.getElementById('hero-desc').innerText = t.heroD;
+        document.getElementById('nav-login-btn').innerText = t.navL;
+        document.getElementById('hero-btn').innerText = t.hire;
+        document.getElementById('login-head').innerText = t.loginH;
+        document.getElementById('send-btn').innerText = t.send;
+        document.querySelector('.lang-btn').innerText = t.lang;
+    }
+
+    function openLogin() { document.getElementById('loginModal').style.display = 'flex'; }
+    function closeLogin() { document.getElementById('loginModal').style.display = 'none'; }
+
+    function attemptLogin() {
+        const u = document.getElementById('username').value.trim();
+        const p = document.getElementById('password').value;
+        if(!u) return;
+        currentUser = u;
+        isAdmin = (u === "admin" && p === "admin");
+        document.getElementById('landing-ui').style.display = 'none';
+        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('portal-ui').style.display = 'flex';
+        if(isAdmin) {
+            document.getElementById('sidebar').style.display = 'block';
+            renderSidebar();
+        } else {
+            selectedChatUser = currentUser;
+            renderMessages();
+        }
+    }
+
+    function renderSidebar() {
+        const side = document.getElementById('sidebar');
+        side.innerHTML = '<div style="padding:20px; font-size:0.7rem; color:var(--accent); letter-spacing:1px">ACTIVE CHATS</div>';
+        Object.keys(chatDB).forEach(user => {
+            const div = document.createElement('div');
+            div.className = `user-tab ${selectedChatUser === user ? 'active' : ''}`;
+            div.innerText = user;
+            div.onclick = () => { selectedChatUser = user; renderSidebar(); renderMessages(); };
+            side.appendChild(div);
+        });
+    }
+
+    function renderMessages() {
+        const display = document.getElementById('msgDisplay');
+        display.innerHTML = "";
+        const history = chatDB[selectedChatUser] || [];
+        history.forEach(m => {
+            const div = document.createElement('div');
+            div.className = `bubble ${m.sender}`;
+            div.innerHTML = m.isFile ? `${m.text} <span class="file-notif">📄 Attachment Shared</span>` : m.text;
+            display.appendChild(div);
+        });
+        display.scrollTop = display.scrollHeight;
+    }
+
+    function handleSend(isFile = false, fileName = "") {
+        const input = document.getElementById('msgInput');
+        const text = isFile ? fileName : input.value.trim();
+        if(!text || !selectedChatUser) return;
+        if(!chatDB[selectedChatUser]) chatDB[selectedChatUser] = [];
+        chatDB[selectedChatUser].push({ sender: isAdmin ? 'admin' : 'client', text: text, isFile: isFile });
+        localStorage.setItem('mf_midnight_db', JSON.stringify(chatDB));
+        input.value = "";
+        renderMessages();
+        if(isAdmin) renderSidebar();
+    }
+
+    function handleFileUpload() {
+        const file = document.getElementById('file-input').files[0];
+        if(file) handleSend(true, file.name);
+    }
+
+    document.getElementById('msgInput').addEventListener("keypress", (e) => {
+        if(e.key === "Enter") handleSend();
+    });
+</script>
+</body>
+</html>
         
         /* Sidebar */
         .contacts { background: #111827; border-right: 1px solid #334155; overflow-y: auto; }
