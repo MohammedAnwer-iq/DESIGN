@@ -20,39 +20,29 @@
         body { font-family: 'Inter', 'Noto Sans Arabic', sans-serif; background: var(--dark-bg); color: white; margin: 0; overflow-x: hidden; }
         [lang="ar"] { direction: rtl; }
 
-        /* --- ADVANCED ANIMATIONS --- */
         @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes glowPulse { 0% { filter: drop-shadow(0 0 5px var(--primary)); } 50% { filter: drop-shadow(0 0 20px var(--primary)); } 100% { filter: drop-shadow(0 0 5px var(--primary)); } }
         .reveal { animation: slideUp 0.8s cubic-bezier(0.2, 1, 0.3, 1) both; }
 
-        /* --- PRELOADER --- */
         #loader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 0.8s; }
         .loader-name { font-family: 'Playfair Display', serif; font-size: 2.5rem; animation: glowPulse 2s infinite; letter-spacing: 5px; }
 
-        /* --- NAVIGATION --- */
         nav { padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--glass-border); }
         .logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--primary); }
 
-        /* --- HERO --- */
         .hero { padding: 80px 5% 40px; text-align: center; min-height: 70vh; display: flex; flex-direction: column; justify-content: center; }
         .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 10vw, 5.5rem); margin: 0; line-height: 1.1; }
         .hero p { color: #94a3b8; font-size: 1.1rem; margin: 25px auto; max-width: 600px; }
 
-        /* --- PORTAL ELEMENTS --- */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .login-card { background: var(--surface); padding: 40px 30px; border-radius: 30px; width: 100%; max-width: 400px; border: 1px solid var(--primary); box-shadow: var(--neon); }
         input { width: 100%; padding: 15px; margin: 10px 0; background: #000; border: 1px solid #222; color: white; border-radius: 12px; font-size: 16px; }
 
         #portal-ui { display: none; height: 100vh; flex-direction: column; }
         .portal-header { padding: 15px; background: #000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--glass-border); }
-        
         .main-app { display: flex; flex: 1; overflow: hidden; position: relative; }
         
-        /* --- ADMIN DASHBOARD SIDEBAR --- */
-        .sidebar { 
-            width: 320px; background: #050505; border-right: 1px solid var(--glass-border); 
-            display: none; flex-direction: column; transition: 0.3s; z-index: 10;
-        }
+        .sidebar { width: 320px; background: #050505; border-right: 1px solid var(--glass-border); display: none; flex-direction: column; transition: 0.3s; z-index: 10; }
         @media (max-width: 768px) {
             .sidebar { position: absolute; left: 0; top: 0; bottom: 0; width: 85%; transform: translateX(-100%); }
             .sidebar.open { transform: translateX(0); box-shadow: 20px 0 50px rgba(0,0,0,0.9); }
@@ -61,14 +51,10 @@
         }
 
         .admin-stats { padding: 20px; background: rgba(139, 92, 246, 0.05); margin: 15px; border-radius: 15px; border: 1px solid var(--glass-border); }
-        .stat-box { font-size: 0.8rem; color: #94a3b8; margin-bottom: 5px; }
-        .stat-val { font-size: 1.2rem; font-weight: bold; color: var(--primary); }
-
-        .user-tab { padding: 18px 20px; border-bottom: 1px solid #111; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+        .user-tab { padding: 18px 20px; border-bottom: 1px solid #111; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .user-tab.active { background: rgba(139, 92, 246, 0.1); border-left: 4px solid var(--primary); }
         [lang="ar"] .user-tab.active { border-left: none; border-right: 4px solid var(--primary); }
 
-        /* --- MESSAGING AREA --- */
         .chat-view { flex: 1; display: flex; flex-direction: column; background: #000; width: 100%; }
         .messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
         .bubble { padding: 12px 18px; border-radius: 20px; max-width: 85%; font-size: 0.95rem; line-height: 1.4; animation: slideUp 0.4s ease; }
@@ -76,11 +62,8 @@
         .bubble.admin { align-self: flex-start; background: #1a1a1a; border-bottom-left-radius: 2px; }
 
         .input-area { padding: 15px; background: #0a0a0a; display: flex; gap: 10px; border-top: 1px solid var(--glass-border); }
-        .input-area input { margin: 0; flex: 1; }
-
         .btn { padding: 12px 25px; border-radius: 50px; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; }
         .btn-p { background: var(--primary); color: white; box-shadow: var(--neon); }
-        .btn-p:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
@@ -92,14 +75,14 @@
         <div class="logo">M. FAHED</div>
         <div style="display:flex; gap:10px; align-items:center;">
             <a href="https://www.instagram.com/7_mo7_7" target="_blank" style="color:white; font-size:1.2rem;"><i class="fab fa-instagram"></i></a>
-            <button class="btn" style="background:var(--glass); color:white; padding: 8px 15px; font-size:12px;" onclick="toggleLang()" id="langBtn">العربية</button>
-            <button class="btn btn-p" style="padding: 8px 15px; font-size:12px;" onclick="openLogin()" id="navLogin">Portal</button>
+            <button class="btn" style="background:var(--glass); color:white; padding: 8px 15px; font-size:12px;" onclick="window.toggleLang()" id="langBtn">العربية</button>
+            <button class="btn btn-p" style="padding: 8px 15px; font-size:12px;" onclick="window.openLogin()" id="navLogin">Portal</button>
         </div>
     </nav>
     <section class="hero reveal">
         <h1 id="heroH">Creative Vision.</h1>
         <p id="heroP">Luxury branding and digital architecture. I design anything you want with elite precision.</p>
-        <button class="btn btn-p" onclick="openLogin()" id="heroB">Start Project</button>
+        <button class="btn btn-p" onclick="window.openLogin()" id="heroB">Start Project</button>
     </section>
 </div>
 
@@ -108,15 +91,15 @@
         <h2 id="loginH" style="margin:0 0 20px 0; font-family:'Playfair Display';">Portal Access</h2>
         <input type="text" id="username" placeholder="Name">
         <input type="password" id="password" placeholder="Key">
-        <button class="btn btn-p" style="width:100%; margin-top:10px;" onclick="attemptLogin()" id="loginB">Authorize</button>
-        <button class="btn" style="width:100%; background:transparent; color:#666;" onclick="document.getElementById('loginModal').style.display='none'" id="cancelB">Cancel</button>
+        <button class="btn btn-p" style="width:100%; margin-top:10px;" onclick="window.attemptLogin()" id="loginB">Authorize</button>
+        <button class="btn" style="width:100%; background:transparent; color:#666;" onclick="window.closeLogin()" id="cancelB">Cancel</button>
     </div>
 </div>
 
 <div id="portal-ui">
     <header class="portal-header">
         <div style="display:flex; align-items:center;">
-            <button class="btn" id="menuBtn" style="background:var(--primary); margin-right:10px; display:none;" onclick="toggleSidebar()">☰</button>
+            <button class="btn" id="menuBtn" style="background:var(--primary); margin-right:10px; display:none;" onclick="window.toggleSidebar()">☰</button>
             <span id="portalTitle" style="font-size:0.8rem; letter-spacing:1px; color:var(--primary);">WORKSPACE</span>
         </div>
         <button class="btn" style="background:#450a0a; color:white; font-size:11px;" onclick="location.reload()" id="logoutB">EXIT</button>
@@ -129,11 +112,11 @@
             </div>
             <div id="userList" style="flex:1; overflow-y:auto;"></div>
         </aside>
-        <main class="chat-view" onclick="closeSidebarIfMobile()">
+        <main class="chat-view" onclick="window.closeSidebarIfMobile()">
             <div class="messages" id="msgDisplay"></div>
             <div class="input-area">
                 <input type="text" id="msgInput" placeholder="...">
-                <button class="btn btn-p" onclick="handleSend()" id="sendB">Send</button>
+                <button class="btn btn-p" onclick="window.handleSend()" id="sendB">Send</button>
             </div>
         </main>
     </div>
@@ -162,18 +145,11 @@
     let selectedUser = "";
 
     const dict = {
-        en: { 
-            lang: "العربية", navL: "Portal", heroH: "Creative Vision.", heroP: "Luxury branding and digital architecture. I design anything you want with elite precision.", 
-            heroB: "Start Project", loginH: "Portal Access", loginB: "Authorize", cancelB: "Cancel", 
-            portalT: "WORKSPACE", logoutB: "EXIT", statT: "Active Clients", sendB: "Send", ph: "Type message..."
-        },
-        ar: { 
-            lang: "English", navL: "البوابة", heroH: "رؤية إبداعية", heroP: "هوية تجارية فاخرة وهندسة رقمية. أصمم لك أي شيء تريده بدقة متناهية.", 
-            heroB: "ابدأ مشروعك", loginH: "دخول البوابة", loginB: "دخول", cancelB: "إلغاء", 
-            portalT: "مساحة العمل", logoutB: "خروج", statT: "العملاء النشطون", sendB: "إرسال", ph: "اكتب رسالتك..."
-        }
+        en: { lang: "العربية", navL: "Portal", heroH: "Creative Vision.", heroP: "Luxury branding and digital architecture. I design anything you want with elite precision.", heroB: "Start Project", loginH: "Portal Access", loginB: "Authorize", cancelB: "Cancel", portalT: "WORKSPACE", logoutB: "EXIT", statT: "Active Clients", sendB: "Send", ph: "Type message..." },
+        ar: { lang: "English", navL: "البوابة", heroH: "رؤية إبداعية", heroP: "هوية تجارية فاخرة وهندسة رقمية. أصمم لك أي شيء تريده بدقة متناهية.", heroB: "ابدأ مشروعك", loginH: "دخول البوابة", loginB: "دخول", cancelB: "إلغاء", portalT: "مساحة العمل", logoutB: "خروج", statT: "العملاء النشطون", sendB: "إرسال", ph: "اكتب رسالتك..." }
     };
 
+    // --- Global Attachment for HTML Events ---
     window.toggleLang = () => {
         lang = lang === 'en' ? 'ar' : 'en';
         document.getElementById('html-tag').setAttribute('lang', lang);
@@ -193,8 +169,8 @@
         document.getElementById('msgInput').placeholder = d.ph;
     };
 
-    window.onload = () => setTimeout(() => document.getElementById('loader').style.opacity = '0', 1500);
     window.openLogin = () => document.getElementById('loginModal').style.display = 'flex';
+    window.closeLogin = () => document.getElementById('loginModal').style.display = 'none';
 
     window.attemptLogin = () => {
         const u = document.getElementById('username').value.trim();
@@ -205,7 +181,6 @@
         document.getElementById('landing-ui').style.display = 'none';
         document.getElementById('loginModal').style.display = 'none';
         document.getElementById('portal-ui').style.display = 'flex';
-        
         if(isAdmin) {
             document.getElementById('sidebar').style.display = 'flex';
             document.getElementById('menuBtn').style.display = 'block';
@@ -230,12 +205,8 @@
                 keys.forEach(user => {
                     const div = document.createElement('div');
                     div.className = `user-tab ${selectedUser === user ? 'active' : ''}`;
-                    div.innerHTML = `<span>${user}</span> <i class="fas fa-trash" onclick="deleteChat('${user}')"></i>`;
-                    div.onclick = (e) => {
-                        if(e.target.tagName !== 'I') {
-                            selectedUser = user; listenToChat(user); listenToAll(); closeSidebarIfMobile();
-                        }
-                    };
+                    div.innerHTML = `<span>${user}</span> <i class="fas fa-trash" onclick="window.deleteChat('${user}')"></i>`;
+                    div.onclick = (e) => { if(e.target.tagName !== 'I') { selectedUser = user; listenToChat(user); listenToAll(); window.closeSidebarIfMobile(); } };
                     list.appendChild(div);
                 });
             }
@@ -264,15 +235,12 @@
     window.handleSend = () => {
         const input = document.getElementById('msgInput');
         if(!input.value.trim() || !selectedUser) return;
-        push(ref(db, 'chats/' + selectedUser), {
-            sender: isAdmin ? 'admin' : 'client',
-            text: input.value,
-            read: false,
-            time: Date.now()
-        });
+        push(ref(db, 'chats/' + selectedUser), { sender: isAdmin ? 'admin' : 'client', text: input.value, read: false, time: Date.now() });
         input.value = "";
     };
+
+    setTimeout(() => document.getElementById('loader').style.opacity = '0', 1500);
 </script>
 </body>
-        </html>
-        
+    </html>
+                
