@@ -3,187 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammed Fahed | Graphic Design Portfolio</title>
+    <title>Mohammed Fahed | Premium Design</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #7c3aed; 
-            --dark-bg: #050505; 
-            --surface: #0f111a; 
-            --border: #1e1b4b;
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
+            --primary: #8b5cf6; 
+            --dark-bg: #030303; 
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --neon-glow: 0 0 25px rgba(139, 92, 246, 0.6);
         }
 
         body { 
             font-family: 'Inter', sans-serif; 
             background: var(--dark-bg); 
-            color: var(--text-main); 
+            color: white; 
             margin: 0; 
-            /* Subtle grid pattern to prevent "empty" feel */
-            background-image: linear-gradient(rgba(30, 27, 75, 0.2) 1px, transparent 1px), 
-                              linear-gradient(90deg, rgba(30, 27, 75, 0.2) 1px, transparent 1px);
-            background-size: 50px 50px;
+            overflow: hidden; /* Locked until loader finishes */
         }
 
-        [lang="ar"] { direction: rtl; }
-        
-        /* Navigation */
-        nav { 
-            padding: 25px 8%; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            background: rgba(5, 5, 5, 0.9); 
-            border-bottom: 1px solid var(--border);
-            position: sticky; 
-            top: 0; 
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--text-main); letter-spacing: 2px; }
-
-        /* Hero Section */
-        .hero { 
-            padding: 120px 10% 80px; 
-            text-align: center; 
-            background: radial-gradient(circle at top, #1e1b4b 0%, transparent 60%);
-        }
-
-        .hero h1 { 
-            font-family: 'Playfair Display', serif; 
-            font-size: clamp(2.5rem, 8vw, 5rem); 
-            margin: 0; 
-            line-height: 1.1;
-        }
-
-        .hero p { 
-            font-size: 1.1rem; 
-            color: var(--text-dim); 
-            max-width: 700px; 
-            margin: 30px auto; 
-            line-height: 1.8; 
-        }
-
-        /* Formal Services Section (Text-based, not rectangles) */
-        .services-list {
+        /* --- PRELOADER ANIMATION --- */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 9999;
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin-top: 50px;
-            flex-wrap: wrap;
-            border-top: 1px solid var(--border);
-            padding-top: 40px;
+            align-items: center;
+            transition: opacity 1s ease, visibility 1s;
         }
 
-        .service-item {
-            text-align: left;
-            max-width: 200px;
+        .loader-content {
+            text-align: center;
         }
 
-        .service-item h3 { color: var(--primary); font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
-        .service-item p { font-size: 0.85rem; color: var(--text-dim); margin: 0; }
+        .loader-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #8b5cf6, #d8b4fe, #8b5cf6);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite, draw 2s ease-out forwards;
+            opacity: 0;
+        }
 
-        /* Buttons */
-        .btn { padding: 14px 32px; border-radius: 4px; border: none; cursor: pointer; font-weight: 600; transition: 0.4s; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-p { background: var(--primary); color: white; }
-        .btn-p:hover { background: #6d28d9; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3); }
+        @keyframes shine { to { background-position: 200% center; } }
+        @keyframes draw { 
+            0% { opacity: 0; letter-spacing: 25px; transform: scale(0.8); }
+            100% { opacity: 1; letter-spacing: 10px; transform: scale(1); }
+        }
 
-        /* Modal */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
-        .login-card { background: #0a0a0a; padding: 50px; border: 1px solid var(--border); width: 100%; max-width: 400px; }
-        input { width: 100%; padding: 15px; margin: 15px 0; background: transparent; border: 1px solid #333; color: white; border-radius: 0; font-size: 1rem; }
-        input:focus { border-color: var(--primary); outline: none; }
+        /* --- LIGHTING EFFECTS --- */
+        .spotlight {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(139, 92, 246, 0.12) 0%, transparent 60%);
+            pointer-events: none; z-index: 998;
+        }
 
-        /* Portal Styling */
-        #portal-ui { display: none; height: 100vh; flex-direction: column; background: var(--dark-bg); }
-        .portal-header { padding: 15px 5%; background: #050505; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+        /* --- NAVIGATION --- */
+        nav { 
+            padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; 
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
+            position: sticky; top: 0; z-index: 100;
+        }
+
+        .social-link:hover { color: #d62976; filter: drop-shadow(0 0 10px #d62976); transform: translateY(-3px); }
+
+        /* --- HERO --- */
+        .hero { padding: 120px 10%; text-align: center; }
+        .hero h1 { 
+            font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 12vw, 7rem); 
+            margin: 0; background: linear-gradient(to bottom, #fff 40%, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.3));
+        }
+
+        /* --- PORTAL UI --- */
+        #portal-ui { display: none; height: 100vh; flex-direction: column; }
+        .main-app { display: flex; flex: 1; overflow: hidden; background: #000; }
         
-        .main-app { display: flex; flex: 1; overflow: hidden; position: relative; }
-        .sidebar { width: 300px; background: #080808; border-right: 1px solid var(--border); overflow-y: auto; z-index: 10; }
-        
-        @media (max-width: 768px) {
-            .sidebar { position: absolute; left: 0; width: 85%; height: 100%; transform: translateX(-100%); transition: 0.3s; }
-            .sidebar.open { transform: translateX(0); }
-            .hero h1 { font-size: 3rem; }
-            .services-list { flex-direction: column; align-items: center; text-align: center; }
+        .sidebar { width: 320px; border-right: 1px solid var(--glass-border); display: none; background: #050505; }
+        .user-tab { 
+            padding: 25px; border-bottom: 1px solid var(--glass-border); cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            transition: 0.4s;
         }
+        .user-tab.active { background: rgba(139, 92, 246, 0.1); border-left: 4px solid var(--primary); box-shadow: var(--neon-glow); }
 
-        .user-tab { padding: 25px; border-bottom: 1px solid #111; cursor: pointer; font-size: 0.9rem; letter-spacing: 1px; color: var(--text-dim); }
-        .user-tab.active { background: #0f111a; color: var(--primary); border-left: 3px solid var(--primary); }
-
-        .chat-view { flex: 1; display: flex; flex-direction: column; background: #020202; }
+        /* --- MESSAGES --- */
+        .chat-view { flex: 1; display: flex; flex-direction: column; background: radial-gradient(at center, #0a0a0a, #000); }
         .messages { flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
-        .bubble { padding: 15px 20px; max-width: 75%; font-size: 0.95rem; line-height: 1.6; border: 1px solid #222; }
-        .bubble.client { align-self: flex-end; background: var(--primary); color: white; border: none; }
-        .bubble.admin { align-self: flex-start; background: #0a0a0a; border-color: var(--border); }
+        
+        .bubble { 
+            padding: 15px 22px; border-radius: 25px; max-width: 65%; font-size: 0.95rem; line-height: 1.6;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); border: 1px solid var(--glass-border);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.8) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-        .input-area { padding: 25px 5%; background: #050505; display: flex; gap: 20px; align-items: center; border-top: 1px solid var(--border); }
-        .input-area input { margin: 0; border: 1px solid #222; }
+        .bubble.client { align-self: flex-end; background: linear-gradient(135deg, var(--primary), #6d28d9); border: none; }
+        .bubble.admin { align-self: flex-start; background: rgba(20, 20, 20, 0.8); backdrop-filter: blur(10px); }
+
+        /* RECEIPTS */
+        .receipt { font-size: 0.7rem; color: #94a3b8; margin-top: 5px; display: block; text-align: right; }
+        .fa-check-double { margin-left: 4px; }
+        .read { color: #4ade80; text-shadow: 0 0 5px #4ade80; }
+
+        .input-area { padding: 30px 8%; background: #050505; display: flex; gap: 15px; border-top: 1px solid var(--glass-border); align-items: center; }
+        .input-area input { 
+            flex: 1; background: #111; border: 1px solid #333; color: white; padding: 20px 30px; 
+            border-radius: 50px; outline: none; font-size: 1rem;
+        }
+        .input-area input:focus { border-color: var(--primary); box-shadow: var(--neon-glow); }
+
+        .btn { padding: 15px 35px; border-radius: 50px; font-weight: 700; cursor: pointer; transition: 0.4s; border: 1px solid var(--glass-border); letter-spacing: 1px; }
+        .btn-p { background: var(--primary); border: none; box-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }
+        .btn-p:hover { transform: translateY(-5px); box-shadow: var(--neon-glow); }
+
     </style>
 </head>
 <body>
 
+<div id="loader">
+    <div class="loader-content">
+        <div class="loader-name">Mohammed Fahed</div>
+    </div>
+</div>
+
+<div class="spotlight" id="cursor-light"></div>
+
 <div id="landing-ui">
     <nav>
         <div class="logo">M. FAHED</div>
-        <div style="display:flex; gap:15px;">
-            <button class="lang-btn" onclick="toggleLang()">العربية</button>
-            <button class="btn btn-p" onclick="openLogin()" id="nav-login-btn">Portal</button>
+        <div style="display:flex; align-items:center; gap:25px;">
+            <a href="https://www.instagram.com/7_mo7_7" target="_blank" class="social-link" style="color:white; font-size:1.4rem;"><i class="fab fa-instagram"></i></a>
+            <button class="btn" style="background:transparent; color:white;" onclick="toggleLang()">العربية</button>
+            <button class="btn btn-p" onclick="openLogin()">CLIENT PORTAL</button>
         </div>
     </nav>
-
     <section class="hero">
-        <h1 id="hero-title">Visual Excellence.</h1>
-        <p id="hero-desc">Bespoke graphic design services for high-end brands. We transform concepts into digital reality with precision and formal elegance.</p>
-        <button class="btn btn-p" onclick="openLogin()" id="hero-btn">Engage Services</button>
-
-        <div class="services-list">
-            <div class="service-item">
-                <h3>Identity</h3>
-                <p>Complete brand guidelines and logo architecture.</p>
-            </div>
-            <div class="service-item">
-                <h3>Digital</h3>
-                <p>User-centric interfaces and modern web experiences.</p>
-            </div>
-            <div class="service-item">
-                <h3>Motion</h3>
-                <p>Dynamic visual storytelling and animation.</p>
-            </div>
-        </div>
+        <h1 style="margin-bottom:20px;">Designed to Stand Out.</h1>
+        <p style="color:#94a3b8; font-size:1.2rem; max-width:800px; margin: 0 auto 40px;">Luxury branding and digital architecture. I design anything you want with elite precision.</p>
+        <button class="btn btn-p" onclick="openLogin()">HIRE ME</button>
     </section>
 </div>
 
-<div class="modal" id="loginModal">
-    <div class="login-card">
-        <h2 id="login-head" style="font-family:'Playfair Display'; font-size:2rem; margin-bottom:10px;">Portal Access</h2>
-        <p style="color:var(--text-dim); font-size:0.8rem; margin-bottom:30px;">Authorized client login required.</p>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button class="btn btn-p" style="width:100%" onclick="attemptLogin()">Secure Login</button>
-        <button class="btn" style="width:100%; background:transparent; color:var(--text-dim); margin-top:10px" onclick="closeLogin()">Return</button>
+<div class="modal" id="loginModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:1000; align-items:center; justify-content:center;">
+    <div style="background:#080808; padding:60px; border:1px solid var(--primary); border-radius:40px; text-align:center; width:400px; box-shadow: var(--neon-glow);">
+        <h2 style="font-family:'Playfair Display'; font-size:2.5rem; margin-bottom:10px;">Portal Access</h2>
+        <input type="text" id="username" placeholder="Full Name" style="width:100%; padding:18px; margin:15px 0; background:#000; border:1px solid #222; color:white; border-radius:15px;">
+        <input type="password" id="password" placeholder="Key Phrase" style="width:100%; padding:18px; margin:15px 0; background:#000; border:1px solid #222; color:white; border-radius:15px;">
+        <button class="btn btn-p" style="width:100%;" onclick="attemptLogin()">AUTHORIZE SESSION</button>
     </div>
 </div>
 
 <div id="portal-ui">
-    <header class="portal-header">
-        <div style="display:flex; align-items:center;">
-            <button class="btn" style="background:var(--primary); margin-right:15px; display:none;" id="mobileToggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
-            <span id="portal-user-title" style="letter-spacing:2px; font-weight:300;">COMMUNICATION PORTAL</span>
-        </div>
-        <button class="btn" style="background:#450a0a; color:white; font-size:10px;" onclick="location.reload()">Terminate Session</button>
+    <header style="padding:20px 5%; display:flex; justify-content:space-between; border-bottom:1px solid var(--glass-border); background:#000;">
+        <span style="letter-spacing:4px; font-size:0.7rem; color:var(--primary);">AUTHORIZED COMMUNICATIONS PORTAL</span>
+        <button class="btn" style="border:none; color:#ff4d4d; background:transparent;" onclick="location.reload()">TERMINATE</button>
     </header>
     <div class="main-app">
         <aside class="sidebar" id="sidebar"></aside>
         <main class="chat-view">
             <div class="messages" id="msgDisplay"></div>
             <div class="input-area">
-                <label style="cursor:pointer; opacity:0.6" for="file-input">📎</label>
-                <input type="file" id="file-input" onchange="handleFileUpload()" style="display:none">
-                <input type="text" id="msgInput" placeholder="Enter message..." style="margin:0">
-                <button class="btn btn-p" onclick="handleSend()" id="send-btn">Send</button>
+                <input type="text" id="msgInput" placeholder="Describe your creative requirements...">
+                <button class="btn btn-p" onclick="handleSend()">SEND</button>
             </div>
         </main>
     </div>
@@ -191,7 +180,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCTd1n2hjcKSFLk7Xl8saeRpBS_nfpL9i8",
@@ -206,29 +195,25 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    let currentLang = 'en';
+    // Loader Logic
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('loader').style.opacity = '0';
+            document.getElementById('loader').style.visibility = 'hidden';
+            document.body.style.overflow = 'auto';
+        }, 2500);
+    });
+
     let currentUser = "";
     let isAdmin = false;
     let selectedChatUser = "";
 
-    const t = {
-        en: { heroT: "Visual Excellence.", heroD: "Bespoke graphic design services for high-end brands. We transform concepts into digital reality with precision and formal elegance.", navL: "Portal", loginH: "Portal Access", send: "Send", lang: "العربية" },
-        ar: { heroT: "التميز البصري.", heroD: "خدمات تصميم جرافيك مخصصة للعلامات التجارية الراقية. نحول المفاهيم إلى واقع رقمي بدقة وأناقة رسمية.", navL: "البوابة", loginH: "دخول البوابة", send: "إرسال", lang: "English" }
-    };
-
-    window.toggleLang = () => {
-        currentLang = currentLang === 'en' ? 'ar' : 'en';
-        document.getElementById('html-tag').setAttribute('lang', currentLang);
-        document.getElementById('hero-title').innerText = t[currentLang].heroT;
-        document.getElementById('hero-desc').innerText = t[currentLang].heroD;
-        document.getElementById('nav-login-btn').innerText = t[currentLang].navL;
-        document.getElementById('login-head').innerText = t[currentLang].loginH;
-        document.getElementById('send-btn').innerText = t[currentLang].send;
-        document.querySelector('.lang-btn').innerText = t[currentLang].lang;
-    };
+    document.addEventListener('mousemove', (e) => {
+        document.getElementById('cursor-light').style.setProperty('--x', e.clientX + 'px');
+        document.getElementById('cursor-light').style.setProperty('--y', e.clientY + 'px');
+    });
 
     window.openLogin = () => document.getElementById('loginModal').style.display = 'flex';
-    window.closeLogin = () => document.getElementById('loginModal').style.display = 'none';
 
     window.attemptLogin = () => {
         const u = document.getElementById('username').value.trim();
@@ -240,13 +225,10 @@
         document.getElementById('loginModal').style.display = 'none';
         document.getElementById('portal-ui').style.display = 'flex';
         
-        if(window.innerWidth <= 768 && isAdmin) document.getElementById('mobileToggle').style.display = 'block';
-
         if(isAdmin) {
             document.getElementById('sidebar').style.display = 'block';
             listenToAll();
         } else {
-            document.getElementById('sidebar').style.display = 'none';
             selectedChatUser = currentUser;
             listenToChat(currentUser);
         }
@@ -255,53 +237,56 @@
     function listenToAll() {
         onValue(ref(db, 'chats/'), (snap) => {
             const side = document.getElementById('sidebar');
-            side.innerHTML = '<div style="padding:20px; font-size:0.6rem; letter-spacing:2px;">DIRECTORY</div>';
+            side.innerHTML = '<div style="padding:25px; font-size:0.6rem; color:var(--primary); letter-spacing:2px;">DIRECTORY</div>';
             const data = snap.val();
             if(data) Object.keys(data).forEach(user => {
                 const div = document.createElement('div');
                 div.className = `user-tab ${selectedChatUser === user ? 'active' : ''}`;
-                div.innerText = user.toUpperCase();
-                div.onclick = () => { 
-                    selectedChatUser = user; 
-                    listenToChat(user); 
-                    listenToAll(); 
-                    if(window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+                div.innerHTML = `<span>${user.toUpperCase()}</span> <i class="fas fa-trash-alt" style="color:#ff4d4d;" onclick="deleteChat('${user}')"></i>`;
+                div.onclick = (e) => {
+                    if(!e.target.classList.contains('fa-trash-alt')) {
+                        selectedChatUser = user; listenToChat(user); listenToAll();
+                    }
                 };
                 side.appendChild(div);
             });
         });
     }
 
+    window.deleteChat = (user) => {
+        if(confirm(`Erase data for ${user}?`)) remove(ref(db, 'chats/' + user));
+    };
+
     function listenToChat(user) {
         onValue(ref(db, 'chats/' + user), (snap) => {
             const display = document.getElementById('msgDisplay');
             display.innerHTML = "";
             const messages = snap.val();
-            if(messages) Object.values(messages).forEach(m => {
-                const div = document.createElement('div');
-                div.className = `bubble ${m.sender}`;
-                div.innerText = m.text;
-                display.appendChild(div);
-            });
+            if(messages) {
+                Object.keys(messages).forEach(key => {
+                    const m = messages[key];
+                    const div = document.createElement('div');
+                    div.className = `bubble ${m.sender}`;
+                    const readState = m.read ? 'read' : '';
+                    div.innerHTML = `${m.text} <span class="receipt"><i class="fas fa-check-double ${readState}"></i></span>`;
+                    display.appendChild(div);
+                    if(isAdmin && !m.read) update(ref(db, `chats/${user}/${key}`), { read: true });
+                });
+            }
             display.scrollTop = display.scrollHeight;
         });
     }
 
-    window.handleSend = (isFile = false, fName = "") => {
+    window.handleSend = () => {
         const input = document.getElementById('msgInput');
-        const text = isFile ? "[FILE] " + fName : input.value.trim();
-        if(!text || !selectedChatUser) return;
+        if(!input.value.trim() || !selectedChatUser) return;
         push(ref(db, 'chats/' + selectedChatUser), {
             sender: isAdmin ? 'admin' : 'client',
-            text: text,
-            timestamp: Date.now()
+            text: input.value,
+            timestamp: Date.now(),
+            read: false
         });
         input.value = "";
-    };
-
-    window.handleFileUpload = () => {
-        const file = document.getElementById('file-input').files[0];
-        if(file) window.handleSend(true, file.name);
     };
 </script>
 </body>
