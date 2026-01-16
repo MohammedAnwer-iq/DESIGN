@@ -3,94 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammed Fahed | Graphic Designer</title>
+    <title>Mohammed Fahed | Graphic Design Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #7c3aed; 
-            --dark-bg: #020617; 
-            --surface: #0f172a; 
-            --card: #1e1b4b; 
-            --text: #f8fafc;
-            --accent: #d8b4fe;
+            --dark-bg: #050505; 
+            --surface: #0f111a; 
+            --border: #1e1b4b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
         }
 
-        body { font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--text); margin: 0; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--dark-bg); 
+            color: var(--text-main); 
+            margin: 0; 
+            /* Subtle grid pattern to prevent "empty" feel */
+            background-image: linear-gradient(rgba(30, 27, 75, 0.2) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(30, 27, 75, 0.2) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
         [lang="ar"] { direction: rtl; }
         
         /* Navigation */
-        nav { padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; background: rgba(2, 6, 23, 0.95); border-bottom: 1px solid #1e1b4b; position: sticky; top: 0; z-index: 100; }
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); letter-spacing: 2px; }
-        .lang-btn { background: var(--surface); color: var(--accent); border: 1px solid var(--primary); padding: 5px 15px; border-radius: 5px; cursor: pointer; }
+        nav { 
+            padding: 25px 8%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: rgba(5, 5, 5, 0.9); 
+            border-bottom: 1px solid var(--border);
+            position: sticky; 
+            top: 0; 
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
 
-        /* Hero */
-        .hero { height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, #2e1065 0%, #020617 70%); }
-        .hero h1 { font-size: 4rem; margin: 0; text-shadow: 0 0 20px rgba(124, 58, 237, 0.5); }
-        .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin: 20px 0; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--text-main); letter-spacing: 2px; }
 
-        /* Portal UI */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; z-index: 1000; }
-        .login-card { background: var(--card); padding: 40px; border-radius: 20px; width: 340px; border: 1px solid var(--primary); }
-        input { width: 100%; padding: 12px; margin: 10px 0; background: #020617; border: 1px solid #334155; color: white; border-radius: 8px; box-sizing: border-box; }
-        .btn { padding: 12px 25px; border-radius: 10px; border: none; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        /* Hero Section */
+        .hero { 
+            padding: 120px 10% 80px; 
+            text-align: center; 
+            background: radial-gradient(circle at top, #1e1b4b 0%, transparent 60%);
+        }
+
+        .hero h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(2.5rem, 8vw, 5rem); 
+            margin: 0; 
+            line-height: 1.1;
+        }
+
+        .hero p { 
+            font-size: 1.1rem; 
+            color: var(--text-dim); 
+            max-width: 700px; 
+            margin: 30px auto; 
+            line-height: 1.8; 
+        }
+
+        /* Formal Services Section (Text-based, not rectangles) */
+        .services-list {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--border);
+            padding-top: 40px;
+        }
+
+        .service-item {
+            text-align: left;
+            max-width: 200px;
+        }
+
+        .service-item h3 { color: var(--primary); font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+        .service-item p { font-size: 0.85rem; color: var(--text-dim); margin: 0; }
+
+        /* Buttons */
+        .btn { padding: 14px 32px; border-radius: 4px; border: none; cursor: pointer; font-weight: 600; transition: 0.4s; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
         .btn-p { background: var(--primary); color: white; }
+        .btn-p:hover { background: #6d28d9; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3); }
 
-        #portal-ui { display: none; height: 100vh; flex-direction: column; }
-        .portal-header { padding: 15px 5%; background: var(--surface); display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--primary); }
-        .main-app { display: flex; flex: 1; overflow: hidden; }
-        .sidebar { width: 300px; background: #020617; border-right: 1px solid #1e1b4b; display: none; overflow-y: auto; }
-        .user-tab { padding: 20px; border-bottom: 1px solid #1e1b4b; cursor: pointer; }
-        .user-tab.active { background: var(--primary); }
+        /* Modal */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
+        .login-card { background: #0a0a0a; padding: 50px; border: 1px solid var(--border); width: 100%; max-width: 400px; }
+        input { width: 100%; padding: 15px; margin: 15px 0; background: transparent; border: 1px solid #333; color: white; border-radius: 0; font-size: 1rem; }
+        input:focus { border-color: var(--primary); outline: none; }
 
-        .chat-view { flex: 1; display: flex; flex-direction: column; background: #0f131f; }
-        .messages { flex: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .bubble { padding: 12px 18px; border-radius: 15px; max-width: 65%; position: relative; }
-        .bubble.client { align-self: flex-end; background: var(--primary); border-bottom-right-radius: 2px; }
-        .bubble.admin { align-self: flex-start; background: var(--surface); border: 1px solid var(--primary); border-bottom-left-radius: 2px; }
-        .file-notif { display: block; font-size: 0.75rem; color: var(--accent); margin-top: 5px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 5px; }
+        /* Portal Styling */
+        #portal-ui { display: none; height: 100vh; flex-direction: column; background: var(--dark-bg); }
+        .portal-header { padding: 15px 5%; background: #050505; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+        
+        .main-app { display: flex; flex: 1; overflow: hidden; position: relative; }
+        .sidebar { width: 300px; background: #080808; border-right: 1px solid var(--border); overflow-y: auto; z-index: 10; }
+        
+        @media (max-width: 768px) {
+            .sidebar { position: absolute; left: 0; width: 85%; height: 100%; transform: translateX(-100%); transition: 0.3s; }
+            .sidebar.open { transform: translateX(0); }
+            .hero h1 { font-size: 3rem; }
+            .services-list { flex-direction: column; align-items: center; text-align: center; }
+        }
 
-        .input-area { padding: 20px; background: var(--surface); display: flex; gap: 15px; align-items: center; border-top: 1px solid var(--primary); }
-        #file-input { display: none; }
+        .user-tab { padding: 25px; border-bottom: 1px solid #111; cursor: pointer; font-size: 0.9rem; letter-spacing: 1px; color: var(--text-dim); }
+        .user-tab.active { background: #0f111a; color: var(--primary); border-left: 3px solid var(--primary); }
+
+        .chat-view { flex: 1; display: flex; flex-direction: column; background: #020202; }
+        .messages { flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
+        .bubble { padding: 15px 20px; max-width: 75%; font-size: 0.95rem; line-height: 1.6; border: 1px solid #222; }
+        .bubble.client { align-self: flex-end; background: var(--primary); color: white; border: none; }
+        .bubble.admin { align-self: flex-start; background: #0a0a0a; border-color: var(--border); }
+
+        .input-area { padding: 25px 5%; background: #050505; display: flex; gap: 20px; align-items: center; border-top: 1px solid var(--border); }
+        .input-area input { margin: 0; border: 1px solid #222; }
     </style>
 </head>
 <body>
 
 <div id="landing-ui">
     <nav>
-        <div class="logo">M.FAHED</div>
-        <div>
+        <div class="logo">M. FAHED</div>
+        <div style="display:flex; gap:15px;">
             <button class="lang-btn" onclick="toggleLang()">العربية</button>
-            <button class="btn btn-p" onclick="openLogin()" id="nav-login-btn">Client Portal</button>
+            <button class="btn btn-p" onclick="openLogin()" id="nav-login-btn">Portal</button>
         </div>
     </nav>
+
     <section class="hero">
-        <h1 id="hero-title">Creative Designer</h1>
-        <p id="hero-desc">Midnight excellence in every pixel. Anything you want, designed to perfection.</p>
-        <button class="btn btn-p" onclick="openLogin()" id="hero-btn">Start Project</button>
+        <h1 id="hero-title">Visual Excellence.</h1>
+        <p id="hero-desc">Bespoke graphic design services for high-end brands. We transform concepts into digital reality with precision and formal elegance.</p>
+        <button class="btn btn-p" onclick="openLogin()" id="hero-btn">Engage Services</button>
+
+        <div class="services-list">
+            <div class="service-item">
+                <h3>Identity</h3>
+                <p>Complete brand guidelines and logo architecture.</p>
+            </div>
+            <div class="service-item">
+                <h3>Digital</h3>
+                <p>User-centric interfaces and modern web experiences.</p>
+            </div>
+            <div class="service-item">
+                <h3>Motion</h3>
+                <p>Dynamic visual storytelling and animation.</p>
+            </div>
+        </div>
     </section>
 </div>
 
 <div class="modal" id="loginModal">
     <div class="login-card">
-        <h2 id="login-head">Sign In</h2>
+        <h2 id="login-head" style="font-family:'Playfair Display'; font-size:2rem; margin-bottom:10px;">Portal Access</h2>
+        <p style="color:var(--text-dim); font-size:0.8rem; margin-bottom:30px;">Authorized client login required.</p>
         <input type="text" id="username" placeholder="Username">
         <input type="password" id="password" placeholder="Password">
-        <button class="btn btn-p" style="width:100%" onclick="attemptLogin()">Login</button>
+        <button class="btn btn-p" style="width:100%" onclick="attemptLogin()">Secure Login</button>
+        <button class="btn" style="width:100%; background:transparent; color:var(--text-dim); margin-top:10px" onclick="closeLogin()">Return</button>
     </div>
 </div>
 
 <div id="portal-ui">
     <header class="portal-header">
-        <span id="portal-user-title">Project Workspace</span>
-        <button class="btn" style="background:#ef4444; color:white;" onclick="location.reload()">Logout</button>
+        <div style="display:flex; align-items:center;">
+            <button class="btn" style="background:var(--primary); margin-right:15px; display:none;" id="mobileToggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+            <span id="portal-user-title" style="letter-spacing:2px; font-weight:300;">COMMUNICATION PORTAL</span>
+        </div>
+        <button class="btn" style="background:#450a0a; color:white; font-size:10px;" onclick="location.reload()">Terminate Session</button>
     </header>
     <div class="main-app">
         <aside class="sidebar" id="sidebar"></aside>
         <main class="chat-view">
             <div class="messages" id="msgDisplay"></div>
             <div class="input-area">
-                <label style="cursor:pointer; font-size:1.5rem;" for="file-input">⊕</label>
-                <input type="file" id="file-input" onchange="handleFileUpload()">
-                <input type="text" id="msgInput" placeholder="Type..." style="margin:0">
+                <label style="cursor:pointer; opacity:0.6" for="file-input">📎</label>
+                <input type="file" id="file-input" onchange="handleFileUpload()" style="display:none">
+                <input type="text" id="msgInput" placeholder="Enter message..." style="margin:0">
                 <button class="btn btn-p" onclick="handleSend()" id="send-btn">Send</button>
             </div>
         </main>
@@ -120,8 +212,8 @@
     let selectedChatUser = "";
 
     const t = {
-        en: { heroT: "Creative Designer", heroD: "Midnight excellence. Anything you want, designed to perfection.", navL: "Client Portal", loginH: "Sign In", send: "Send", lang: "العربية" },
-        ar: { heroT: "مصمم جرافيك", heroD: "تميز في التصميم. أي شيء تريده، أصممه لك بإتقان.", navL: "بوابة العملاء", loginH: "دخول", send: "إرسال", lang: "English" }
+        en: { heroT: "Visual Excellence.", heroD: "Bespoke graphic design services for high-end brands. We transform concepts into digital reality with precision and formal elegance.", navL: "Portal", loginH: "Portal Access", send: "Send", lang: "العربية" },
+        ar: { heroT: "التميز البصري.", heroD: "خدمات تصميم جرافيك مخصصة للعلامات التجارية الراقية. نحول المفاهيم إلى واقع رقمي بدقة وأناقة رسمية.", navL: "البوابة", loginH: "دخول البوابة", send: "إرسال", lang: "English" }
     };
 
     window.toggleLang = () => {
@@ -136,6 +228,7 @@
     };
 
     window.openLogin = () => document.getElementById('loginModal').style.display = 'flex';
+    window.closeLogin = () => document.getElementById('loginModal').style.display = 'none';
 
     window.attemptLogin = () => {
         const u = document.getElementById('username').value.trim();
@@ -146,10 +239,14 @@
         document.getElementById('landing-ui').style.display = 'none';
         document.getElementById('loginModal').style.display = 'none';
         document.getElementById('portal-ui').style.display = 'flex';
+        
+        if(window.innerWidth <= 768 && isAdmin) document.getElementById('mobileToggle').style.display = 'block';
+
         if(isAdmin) {
             document.getElementById('sidebar').style.display = 'block';
             listenToAll();
         } else {
+            document.getElementById('sidebar').style.display = 'none';
             selectedChatUser = currentUser;
             listenToChat(currentUser);
         }
@@ -158,12 +255,18 @@
     function listenToAll() {
         onValue(ref(db, 'chats/'), (snap) => {
             const side = document.getElementById('sidebar');
-            side.innerHTML = '<div style="padding:20px; color:var(--accent); font-size:0.7rem;">CLIENT CHATS</div>';
-            if(snap.val()) Object.keys(snap.val()).forEach(user => {
+            side.innerHTML = '<div style="padding:20px; font-size:0.6rem; letter-spacing:2px;">DIRECTORY</div>';
+            const data = snap.val();
+            if(data) Object.keys(data).forEach(user => {
                 const div = document.createElement('div');
                 div.className = `user-tab ${selectedChatUser === user ? 'active' : ''}`;
-                div.innerText = user;
-                div.onclick = () => { selectedChatUser = user; listenToChat(user); listenToAll(); };
+                div.innerText = user.toUpperCase();
+                div.onclick = () => { 
+                    selectedChatUser = user; 
+                    listenToChat(user); 
+                    listenToAll(); 
+                    if(window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+                };
                 side.appendChild(div);
             });
         });
@@ -173,10 +276,11 @@
         onValue(ref(db, 'chats/' + user), (snap) => {
             const display = document.getElementById('msgDisplay');
             display.innerHTML = "";
-            if(snap.val()) Object.values(snap.val()).forEach(m => {
+            const messages = snap.val();
+            if(messages) Object.values(messages).forEach(m => {
                 const div = document.createElement('div');
                 div.className = `bubble ${m.sender}`;
-                div.innerHTML = m.isFile ? `${m.text} <span class="file-notif">📄 File Shared</span>` : m.text;
+                div.innerText = m.text;
                 display.appendChild(div);
             });
             display.scrollTop = display.scrollHeight;
@@ -185,12 +289,12 @@
 
     window.handleSend = (isFile = false, fName = "") => {
         const input = document.getElementById('msgInput');
-        const text = isFile ? fName : input.value.trim();
+        const text = isFile ? "[FILE] " + fName : input.value.trim();
         if(!text || !selectedChatUser) return;
         push(ref(db, 'chats/' + selectedChatUser), {
             sender: isAdmin ? 'admin' : 'client',
             text: text,
-            isFile: isFile
+            timestamp: Date.now()
         });
         input.value = "";
     };
@@ -201,5 +305,4 @@
     };
 </script>
 </body>
-    </html>
-    
+</html>
