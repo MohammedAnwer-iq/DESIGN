@@ -11,7 +11,6 @@
             --primary: #8b5cf6; 
             --dark-bg: #030303; 
             --surface: #0a0a0a;
-            --glass: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
             --neon: 0 0 25px rgba(139, 92, 246, 0.5);
         }
@@ -20,50 +19,43 @@
         body { font-family: 'Inter', 'Noto Sans Arabic', sans-serif; background: var(--dark-bg); color: white; margin: 0; overflow-x: hidden; }
         [lang="ar"] { direction: rtl; }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes glowPulse { 0% { filter: drop-shadow(0 0 5px var(--primary)); } 50% { filter: drop-shadow(0 0 20px var(--primary)); } 100% { filter: drop-shadow(0 0 5px var(--primary)); } }
-        .reveal { animation: slideUp 0.8s cubic-bezier(0.2, 1, 0.3, 1) both; }
-
+        /* Loader */
         #loader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 0.8s; }
-        .loader-name { font-family: 'Playfair Display', serif; font-size: 2.5rem; animation: glowPulse 2s infinite; letter-spacing: 5px; }
+        .loader-name { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); letter-spacing: 5px; }
 
+        /* Layout */
         nav { padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--glass-border); }
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--primary); }
+        .hero { padding: 80px 5%; text-align: center; min-height: 70vh; display: flex; flex-direction: column; justify-content: center; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 10vw, 5.5rem); margin: 0; }
 
-        .hero { padding: 80px 5% 40px; text-align: center; min-height: 70vh; display: flex; flex-direction: column; justify-content: center; }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 10vw, 5.5rem); margin: 0; line-height: 1.1; }
-        .hero p { color: #94a3b8; font-size: 1.1rem; margin: 25px auto; max-width: 600px; }
-
+        /* Portal */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-        .login-card { background: var(--surface); padding: 40px 30px; border-radius: 30px; width: 100%; max-width: 400px; border: 1px solid var(--primary); box-shadow: var(--neon); }
+        .login-card { background: var(--surface); padding: 40px; border-radius: 30px; width: 100%; max-width: 400px; border: 1px solid var(--primary); box-shadow: var(--neon); }
         input { width: 100%; padding: 15px; margin: 10px 0; background: #000; border: 1px solid #222; color: white; border-radius: 12px; font-size: 16px; }
 
         #portal-ui { display: none; height: 100vh; flex-direction: column; }
-        .portal-header { padding: 15px; background: #000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--glass-border); }
         .main-app { display: flex; flex: 1; overflow: hidden; position: relative; }
+        .sidebar { width: 320px; background: #050505; border-right: 1px solid var(--glass-border); display: none; flex-direction: column; }
         
-        .sidebar { width: 320px; background: #050505; border-right: 1px solid var(--glass-border); display: none; flex-direction: column; transition: 0.3s; z-index: 10; }
         @media (max-width: 768px) {
-            .sidebar { position: absolute; left: 0; top: 0; bottom: 0; width: 85%; transform: translateX(-100%); }
-            .sidebar.open { transform: translateX(0); box-shadow: 20px 0 50px rgba(0,0,0,0.9); }
+            .sidebar { position: absolute; left: 0; top: 0; bottom: 0; width: 85%; transform: translateX(-100%); transition: 0.3s; z-index: 100; }
+            .sidebar.open { transform: translateX(0); }
             [lang="ar"] .sidebar { left: auto; right: 0; transform: translateX(100%); }
             [lang="ar"] .sidebar.open { transform: translateX(0); }
         }
 
-        .admin-stats { padding: 20px; background: rgba(139, 92, 246, 0.05); margin: 15px; border-radius: 15px; border: 1px solid var(--glass-border); }
         .user-tab { padding: 18px 20px; border-bottom: 1px solid #111; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .user-tab.active { background: rgba(139, 92, 246, 0.1); border-left: 4px solid var(--primary); }
-        [lang="ar"] .user-tab.active { border-left: none; border-right: 4px solid var(--primary); }
 
-        .chat-view { flex: 1; display: flex; flex-direction: column; background: #000; width: 100%; }
+        .chat-view { flex: 1; display: flex; flex-direction: column; background: #000; }
         .messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .bubble { padding: 12px 18px; border-radius: 20px; max-width: 85%; font-size: 0.95rem; line-height: 1.4; animation: slideUp 0.4s ease; }
-        .bubble.client { align-self: flex-end; background: var(--primary); border-bottom-right-radius: 2px; }
-        .bubble.admin { align-self: flex-start; background: #1a1a1a; border-bottom-left-radius: 2px; }
+        .bubble { padding: 12px 18px; border-radius: 20px; max-width: 85%; font-size: 0.95rem; }
+        .bubble.client { align-self: flex-end; background: var(--primary); }
+        .bubble.admin { align-self: flex-start; background: #1a1a1a; }
 
         .input-area { padding: 15px; background: #0a0a0a; display: flex; gap: 10px; border-top: 1px solid var(--glass-border); }
         .btn { padding: 12px 25px; border-radius: 50px; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .btn-p { background: var(--primary); color: white; box-shadow: var(--neon); }
+        .btn-p { background: var(--primary); color: white; }
     </style>
 </head>
 <body>
@@ -75,48 +67,46 @@
         <div class="logo">M. FAHED</div>
         <div style="display:flex; gap:10px; align-items:center;">
             <a href="https://www.instagram.com/7_mo7_7" target="_blank" style="color:white; font-size:1.2rem;"><i class="fab fa-instagram"></i></a>
-            <button class="btn" style="background:var(--glass); color:white; padding: 8px 15px; font-size:12px;" onclick="window.toggleLang()" id="langBtn">العربية</button>
-            <button class="btn btn-p" style="padding: 8px 15px; font-size:12px;" onclick="window.openLogin()" id="navLogin">Portal</button>
+            <button class="btn" style="background:rgba(255,255,255,0.1); color:white;" id="langBtn">العربية</button>
+            <button class="btn btn-p" id="navLoginBtn">Portal</button>
         </div>
     </nav>
-    <section class="hero reveal">
+    <section class="hero">
         <h1 id="heroH">Creative Vision.</h1>
         <p id="heroP">Luxury branding and digital architecture. I design anything you want with elite precision.</p>
-        <button class="btn btn-p" onclick="window.openLogin()" id="heroB">Start Project</button>
+        <button class="btn btn-p" id="heroBtn">Start Project</button>
     </section>
 </div>
 
 <div class="modal" id="loginModal">
-    <div class="login-card reveal">
-        <h2 id="loginH" style="margin:0 0 20px 0; font-family:'Playfair Display';">Portal Access</h2>
+    <div class="login-card">
+        <h2 id="loginH" style="margin:0 0 20px 0;">Portal Access</h2>
         <input type="text" id="username" placeholder="Name">
         <input type="password" id="password" placeholder="Key">
-        <button class="btn btn-p" style="width:100%; margin-top:10px;" onclick="window.attemptLogin()" id="loginB">Authorize</button>
-        <button class="btn" style="width:100%; background:transparent; color:#666;" onclick="window.closeLogin()" id="cancelB">Cancel</button>
+        <button class="btn btn-p" style="width:100%;" id="loginSubmit">Authorize</button>
+        <button class="btn" style="width:100%; background:transparent; color:#666;" id="closeLoginBtn">Cancel</button>
     </div>
 </div>
 
 <div id="portal-ui">
-    <header class="portal-header">
+    <header style="padding:15px; background:#000; display:flex; justify-content:space-between; border-bottom:1px solid var(--glass-border);">
         <div style="display:flex; align-items:center;">
-            <button class="btn" id="menuBtn" style="background:var(--primary); margin-right:10px; display:none;" onclick="window.toggleSidebar()">☰</button>
-            <span id="portalTitle" style="font-size:0.8rem; letter-spacing:1px; color:var(--primary);">WORKSPACE</span>
+            <button class="btn" id="menuBtn" style="background:var(--primary); margin-right:10px; display:none;">☰</button>
+            <span id="portalTitle" style="color:var(--primary); font-weight:bold;">WORKSPACE</span>
         </div>
-        <button class="btn" style="background:#450a0a; color:white; font-size:11px;" onclick="location.reload()" id="logoutB">EXIT</button>
+        <button class="btn" style="background:#450a0a; color:white;" id="logoutBtn">EXIT</button>
     </header>
     <div class="main-app">
         <aside class="sidebar" id="sidebar">
-            <div class="admin-stats">
-                <div class="stat-box" id="statT">Active Clients</div>
-                <div class="stat-val" id="clientCount">0</div>
-            </div>
-            <div id="userList" style="flex:1; overflow-y:auto;"></div>
+            <div style="padding:20px; color:#666; font-size:0.7rem;" id="clientLabel">CLIENTS</div>
+            <div id="userList"></div>
         </aside>
-        <main class="chat-view" onclick="window.closeSidebarIfMobile()">
+        <main class="chat-view">
             <div class="messages" id="msgDisplay"></div>
+            <div id="typing-indicator" style="padding: 10px 20px; font-size: 0.8rem; color: var(--primary); display: none;">Typing...</div>
             <div class="input-area">
                 <input type="text" id="msgInput" placeholder="...">
-                <button class="btn btn-p" onclick="window.handleSend()" id="sendB">Send</button>
+                <button class="btn btn-p" id="sendBtn">Send</button>
             </div>
         </main>
     </div>
@@ -124,7 +114,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, push, onValue, remove, update, set, onDisconnect } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCTd1n2hjcKSFLk7Xl8saeRpBS_nfpL9i8",
@@ -145,34 +135,35 @@
     let selectedUser = "";
 
     const dict = {
-        en: { lang: "العربية", navL: "Portal", heroH: "Creative Vision.", heroP: "Luxury branding and digital architecture. I design anything you want with elite precision.", heroB: "Start Project", loginH: "Portal Access", loginB: "Authorize", cancelB: "Cancel", portalT: "WORKSPACE", logoutB: "EXIT", statT: "Active Clients", sendB: "Send", ph: "Type message..." },
-        ar: { lang: "English", navL: "البوابة", heroH: "رؤية إبداعية", heroP: "هوية تجارية فاخرة وهندسة رقمية. أصمم لك أي شيء تريده بدقة متناهية.", heroB: "ابدأ مشروعك", loginH: "دخول البوابة", loginB: "دخول", cancelB: "إلغاء", portalT: "مساحة العمل", logoutB: "خروج", statT: "العملاء النشطون", sendB: "إرسال", ph: "اكتب رسالتك..." }
+        en: { lang: "العربية", navL: "Portal", heroH: "Creative Vision.", heroP: "Luxury branding and digital architecture. I design anything you want with elite precision.", heroB: "Start Project", loginH: "Portal Access", loginB: "Authorize", cancelB: "Cancel", portalT: "WORKSPACE", logoutB: "EXIT", sendB: "Send", typing: "Typing..." },
+        ar: { lang: "English", navL: "البوابة", heroH: "رؤية إبداعية", heroP: "هوية تجارية فاخرة وهندسة رقمية. أصمم لك أي شيء تريده بدقة متناهية.", heroB: "ابدأ مشروعك", loginH: "دخول البوابة", loginB: "دخول", cancelB: "إلغاء", portalT: "مساحة العمل", logoutB: "خروج", sendB: "إرسال", typing: "يكتب الآن..." }
     };
 
-    // --- Global Attachment for HTML Events ---
-    window.toggleLang = () => {
+    // --- BUTTON LOGIC ---
+    document.getElementById('langBtn').addEventListener('click', () => {
         lang = lang === 'en' ? 'ar' : 'en';
         document.getElementById('html-tag').setAttribute('lang', lang);
         const d = dict[lang];
         document.getElementById('langBtn').innerText = d.lang;
-        document.getElementById('navLogin').innerText = d.navL;
+        document.getElementById('navLoginBtn').innerText = d.navL;
         document.getElementById('heroH').innerText = d.heroH;
         document.getElementById('heroP').innerText = d.heroP;
-        document.getElementById('heroB').innerText = d.heroB;
+        document.getElementById('heroBtn').innerText = d.heroB;
         document.getElementById('loginH').innerText = d.loginH;
-        document.getElementById('loginB').innerText = d.loginB;
-        document.getElementById('cancelB').innerText = d.cancelB;
+        document.getElementById('loginSubmit').innerText = d.loginB;
+        document.getElementById('closeLoginBtn').innerText = d.cancelB;
         document.getElementById('portalTitle').innerText = d.portalT;
-        document.getElementById('logoutB').innerText = d.logoutB;
-        document.getElementById('statT').innerText = d.statT;
-        document.getElementById('sendB').innerText = d.sendB;
-        document.getElementById('msgInput').placeholder = d.ph;
-    };
+        document.getElementById('logoutBtn').innerText = d.logoutB;
+        document.getElementById('sendBtn').innerText = d.sendB;
+    });
 
-    window.openLogin = () => document.getElementById('loginModal').style.display = 'flex';
-    window.closeLogin = () => document.getElementById('loginModal').style.display = 'none';
+    document.getElementById('navLoginBtn').addEventListener('click', () => document.getElementById('loginModal').style.display = 'flex');
+    document.getElementById('heroBtn').addEventListener('click', () => document.getElementById('loginModal').style.display = 'flex');
+    document.getElementById('closeLoginBtn').addEventListener('click', () => document.getElementById('loginModal').style.display = 'none');
+    document.getElementById('logoutBtn').addEventListener('click', () => location.reload());
+    document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
 
-    window.attemptLogin = () => {
+    document.getElementById('loginSubmit').addEventListener('click', () => {
         const u = document.getElementById('username').value.trim();
         const p = document.getElementById('password').value;
         if(!u) return;
@@ -181,6 +172,7 @@
         document.getElementById('landing-ui').style.display = 'none';
         document.getElementById('loginModal').style.display = 'none';
         document.getElementById('portal-ui').style.display = 'flex';
+        
         if(isAdmin) {
             document.getElementById('sidebar').style.display = 'flex';
             document.getElementById('menuBtn').style.display = 'block';
@@ -189,31 +181,30 @@
             selectedUser = currentUser;
             listenToChat(currentUser);
         }
-    };
-
-    window.toggleSidebar = () => document.getElementById('sidebar').classList.toggle('open');
-    window.closeSidebarIfMobile = () => document.getElementById('sidebar').classList.remove('open');
+    });
 
     function listenToAll() {
         onValue(ref(db, 'chats/'), (snap) => {
             const list = document.getElementById('userList');
             list.innerHTML = "";
             const data = snap.val();
-            if(data) {
-                const keys = Object.keys(data);
-                document.getElementById('clientCount').innerText = keys.length;
-                keys.forEach(user => {
-                    const div = document.createElement('div');
-                    div.className = `user-tab ${selectedUser === user ? 'active' : ''}`;
-                    div.innerHTML = `<span>${user}</span> <i class="fas fa-trash" onclick="window.deleteChat('${user}')"></i>`;
-                    div.onclick = (e) => { if(e.target.tagName !== 'I') { selectedUser = user; listenToChat(user); listenToAll(); window.closeSidebarIfMobile(); } };
-                    list.appendChild(div);
+            if(data) Object.keys(data).forEach(user => {
+                const div = document.createElement('div');
+                div.className = `user-tab ${selectedUser === user ? 'active' : ''}`;
+                div.innerHTML = `<span>${user}</span> <i class="fas fa-trash del-chat" data-user="${user}"></i>`;
+                div.addEventListener('click', (e) => {
+                    if(!e.target.classList.contains('del-chat')) {
+                        selectedUser = user; listenToChat(user); listenToAll();
+                        document.getElementById('sidebar').classList.remove('open');
+                    } else {
+                        const u = e.target.getAttribute('data-user');
+                        if(confirm(`Delete ${u}?`)) remove(ref(db, 'chats/' + u));
+                    }
                 });
-            }
+                list.appendChild(div);
+            });
         });
     }
-
-    window.deleteChat = (user) => { if(confirm(`Delete ${user}?`)) remove(ref(db, 'chats/' + user)); };
 
     function listenToChat(user) {
         onValue(ref(db, 'chats/' + user), (snap) => {
@@ -221,10 +212,14 @@
             display.innerHTML = "";
             const messages = snap.val();
             if(messages) Object.keys(messages).forEach(key => {
+                if(key === 'typing') {
+                    document.getElementById('typing-indicator').style.display = (messages[key] && messages[key] !== (isAdmin?'admin':'client')) ? 'block' : 'none';
+                    return;
+                }
                 const m = messages[key];
                 const div = document.createElement('div');
                 div.className = `bubble ${m.sender}`;
-                div.innerHTML = `${m.text} <div style="font-size:0.6rem; opacity:0.5; margin-top:5px; text-align:right;">${m.read ? '✓✓' : '✓'}</div>`;
+                div.innerHTML = `${m.text} <div style="font-size:0.6rem; opacity:0.4; text-align:right;">${m.read ? '✓✓' : '✓'}</div>`;
                 display.appendChild(div);
                 if(isAdmin && !m.read) update(ref(db, `chats/${user}/${key}`), { read: true });
             });
@@ -232,15 +227,23 @@
         });
     }
 
-    window.handleSend = () => {
+    document.getElementById('sendBtn').addEventListener('click', () => {
         const input = document.getElementById('msgInput');
         if(!input.value.trim() || !selectedUser) return;
         push(ref(db, 'chats/' + selectedUser), { sender: isAdmin ? 'admin' : 'client', text: input.value, read: false, time: Date.now() });
+        set(ref(db, `chats/${selectedUser}/typing`), false);
         input.value = "";
-    };
+    });
 
-    setTimeout(() => document.getElementById('loader').style.opacity = '0', 1500);
+    document.getElementById('msgInput').addEventListener('input', () => {
+        if(selectedUser) {
+            set(ref(db, `chats/${selectedUser}/typing`), isAdmin ? 'admin' : 'client');
+            setTimeout(() => set(ref(db, `chats/${selectedUser}/typing`), false), 3000);
+        }
+    });
+
+    window.onload = () => setTimeout(() => document.getElementById('loader').style.opacity = '0', 1000);
 </script>
 </body>
     </html>
-                
+            
