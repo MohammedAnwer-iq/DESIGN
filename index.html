@@ -3,68 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mohammed Fahed | Premium Design</title>
+    <title>Mohammed Fahed | Elite Design</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #8b5cf6; 
-            --dark-bg: #030303; 
-            --surface: #0a0a0a;
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --neon: 0 0 25px rgba(139, 92, 246, 0.5);
+            --primary: #8b5cf6; --dark-bg: #030303; --surface: #0a0a0a;
+            --glass-border: rgba(255, 255, 255, 0.08); --neon: 0 0 25px rgba(139, 92, 246, 0.5);
         }
-
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Inter', 'Noto Sans Arabic', sans-serif; background: var(--dark-bg); color: white; margin: 0; overflow-x: hidden; }
         [lang="ar"] { direction: rtl; }
-
-        /* Loader */
-        #loader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 0.8s; }
-        .loader-name { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); letter-spacing: 5px; }
-
-        /* Layout */
-        nav { padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--glass-border); }
+        #loader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 0.5s; pointer-events: none; }
+        nav { padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 100; }
         .hero { padding: 80px 5%; text-align: center; min-height: 70vh; display: flex; flex-direction: column; justify-content: center; }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 10vw, 5.5rem); margin: 0; }
-
-        /* Portal */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .login-card { background: var(--surface); padding: 40px; border-radius: 30px; width: 100%; max-width: 400px; border: 1px solid var(--primary); box-shadow: var(--neon); }
         input { width: 100%; padding: 15px; margin: 10px 0; background: #000; border: 1px solid #222; color: white; border-radius: 12px; font-size: 16px; }
-
         #portal-ui { display: none; height: 100vh; flex-direction: column; }
         .main-app { display: flex; flex: 1; overflow: hidden; position: relative; }
         .sidebar { width: 320px; background: #050505; border-right: 1px solid var(--glass-border); display: none; flex-direction: column; }
-        
         @media (max-width: 768px) {
             .sidebar { position: absolute; left: 0; top: 0; bottom: 0; width: 85%; transform: translateX(-100%); transition: 0.3s; z-index: 100; }
             .sidebar.open { transform: translateX(0); }
             [lang="ar"] .sidebar { left: auto; right: 0; transform: translateX(100%); }
             [lang="ar"] .sidebar.open { transform: translateX(0); }
         }
-
         .user-tab { padding: 18px 20px; border-bottom: 1px solid #111; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .user-tab.active { background: rgba(139, 92, 246, 0.1); border-left: 4px solid var(--primary); }
-
         .chat-view { flex: 1; display: flex; flex-direction: column; background: #000; }
         .messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .bubble { padding: 12px 18px; border-radius: 20px; max-width: 85%; font-size: 0.95rem; }
+        .bubble { padding: 12px 18px; border-radius: 20px; max-width: 85%; }
         .bubble.client { align-self: flex-end; background: var(--primary); }
         .bubble.admin { align-self: flex-start; background: #1a1a1a; }
-
         .input-area { padding: 15px; background: #0a0a0a; display: flex; gap: 10px; border-top: 1px solid var(--glass-border); }
-        .btn { padding: 12px 25px; border-radius: 50px; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .btn-p { background: var(--primary); color: white; }
+        .btn { padding: 12px 25px; border-radius: 50px; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; display: inline-block; }
+        .btn-p { background: var(--primary); color: white; box-shadow: var(--neon); }
     </style>
 </head>
 <body>
 
-<div id="loader"><div class="loader-name">M. FAHED</div></div>
+<div id="loader"><div style="font-family:'Playfair Display'; font-size:2rem; color:var(--primary);">M. FAHED</div></div>
 
 <div id="landing-ui">
     <nav>
-        <div class="logo">M. FAHED</div>
+        <div style="font-family:'Playfair Display'; font-size:1.4rem; color:var(--primary);">M. FAHED</div>
         <div style="display:flex; gap:10px; align-items:center;">
             <a href="https://www.instagram.com/7_mo7_7" target="_blank" style="color:white; font-size:1.2rem;"><i class="fab fa-instagram"></i></a>
             <button class="btn" style="background:rgba(255,255,255,0.1); color:white;" id="langBtn">العربية</button>
@@ -72,9 +55,9 @@
         </div>
     </nav>
     <section class="hero">
-        <h1 id="heroH">Creative Vision.</h1>
+        <h1 id="heroH" style="font-family:'Playfair Display'; font-size:3rem;">Creative Vision.</h1>
         <p id="heroP">Luxury branding and digital architecture. I design anything you want with elite precision.</p>
-        <button class="btn btn-p" id="heroBtn">Start Project</button>
+        <button class="btn btn-p" id="heroBtn" style="width:200px; margin:0 auto;">Start Project</button>
     </section>
 </div>
 
@@ -91,19 +74,17 @@
 <div id="portal-ui">
     <header style="padding:15px; background:#000; display:flex; justify-content:space-between; border-bottom:1px solid var(--glass-border);">
         <div style="display:flex; align-items:center;">
-            <button class="btn" id="menuBtn" style="background:var(--primary); margin-right:10px; display:none;">☰</button>
+            <button class="btn" id="menuBtn" style="background:var(--primary); margin-right:10px; display:none; padding:5px 15px;">☰</button>
             <span id="portalTitle" style="color:var(--primary); font-weight:bold;">WORKSPACE</span>
         </div>
         <button class="btn" style="background:#450a0a; color:white;" id="logoutBtn">EXIT</button>
     </header>
     <div class="main-app">
         <aside class="sidebar" id="sidebar">
-            <div style="padding:20px; color:#666; font-size:0.7rem;" id="clientLabel">CLIENTS</div>
             <div id="userList"></div>
         </aside>
         <main class="chat-view">
             <div class="messages" id="msgDisplay"></div>
-            <div id="typing-indicator" style="padding: 10px 20px; font-size: 0.8rem; color: var(--primary); display: none;">Typing...</div>
             <div class="input-area">
                 <input type="text" id="msgInput" placeholder="...">
                 <button class="btn btn-p" id="sendBtn">Send</button>
@@ -114,7 +95,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, push, onValue, remove, update, set, onDisconnect } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCTd1n2hjcKSFLk7Xl8saeRpBS_nfpL9i8",
@@ -135,51 +116,83 @@
     let selectedUser = "";
 
     const dict = {
-        en: { lang: "العربية", navL: "Portal", heroH: "Creative Vision.", heroP: "Luxury branding and digital architecture. I design anything you want with elite precision.", heroB: "Start Project", loginH: "Portal Access", loginB: "Authorize", cancelB: "Cancel", portalT: "WORKSPACE", logoutB: "EXIT", sendB: "Send", typing: "Typing..." },
-        ar: { lang: "English", navL: "البوابة", heroH: "رؤية إبداعية", heroP: "هوية تجارية فاخرة وهندسة رقمية. أصمم لك أي شيء تريده بدقة متناهية.", heroB: "ابدأ مشروعك", loginH: "دخول البوابة", loginB: "دخول", cancelB: "إلغاء", portalT: "مساحة العمل", logoutB: "خروج", sendB: "إرسال", typing: "يكتب الآن..." }
+        en: { lang: "العربية", navL: "Portal", heroH: "Creative Vision.", heroP: "Luxury branding and digital architecture.", heroB: "Start Project", loginH: "Portal Access", loginB: "Authorize", logoutB: "EXIT", sendB: "Send" },
+        ar: { lang: "English", navL: "البوابة", heroH: "رؤية إبداعية", heroP: "هوية تجارية فاخرة وهندسة رقمية.", heroB: "ابدأ مشروعك", loginH: "دخول البوابة", loginB: "دخول", logoutB: "خروج", sendB: "إرسال" }
     };
 
-    // --- BUTTON LOGIC ---
-    document.getElementById('langBtn').addEventListener('click', () => {
-        lang = lang === 'en' ? 'ar' : 'en';
-        document.getElementById('html-tag').setAttribute('lang', lang);
-        const d = dict[lang];
-        document.getElementById('langBtn').innerText = d.lang;
-        document.getElementById('navLoginBtn').innerText = d.navL;
-        document.getElementById('heroH').innerText = d.heroH;
-        document.getElementById('heroP').innerText = d.heroP;
-        document.getElementById('heroBtn').innerText = d.heroB;
-        document.getElementById('loginH').innerText = d.loginH;
-        document.getElementById('loginSubmit').innerText = d.loginB;
-        document.getElementById('closeLoginBtn').innerText = d.cancelB;
-        document.getElementById('portalTitle').innerText = d.portalT;
-        document.getElementById('logoutBtn').innerText = d.logoutB;
-        document.getElementById('sendBtn').innerText = d.sendB;
-    });
-
-    document.getElementById('navLoginBtn').addEventListener('click', () => document.getElementById('loginModal').style.display = 'flex');
-    document.getElementById('heroBtn').addEventListener('click', () => document.getElementById('loginModal').style.display = 'flex');
-    document.getElementById('closeLoginBtn').addEventListener('click', () => document.getElementById('loginModal').style.display = 'none');
-    document.getElementById('logoutBtn').addEventListener('click', () => location.reload());
-    document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
-
-    document.getElementById('loginSubmit').addEventListener('click', () => {
-        const u = document.getElementById('username').value.trim();
-        const p = document.getElementById('password').value;
-        if(!u) return;
-        currentUser = u;
-        isAdmin = (u === "admin" && p === "admin");
-        document.getElementById('landing-ui').style.display = 'none';
-        document.getElementById('loginModal').style.display = 'none';
-        document.getElementById('portal-ui').style.display = 'flex';
+    // --- GLOBAL CLICK HANDLER ---
+    document.addEventListener('click', (e) => {
+        const id = e.target.id;
         
-        if(isAdmin) {
-            document.getElementById('sidebar').style.display = 'flex';
-            document.getElementById('menuBtn').style.display = 'block';
+        if(id === 'langBtn') {
+            lang = lang === 'en' ? 'ar' : 'en';
+            document.getElementById('html-tag').setAttribute('lang', lang);
+            const d = dict[lang];
+            document.getElementById('langBtn').innerText = d.lang;
+            document.getElementById('navLoginBtn').innerText = d.navL;
+            document.getElementById('heroH').innerText = d.heroH;
+            document.getElementById('heroP').innerText = d.heroP;
+            document.getElementById('heroBtn').innerText = d.heroB;
+            document.getElementById('loginH').innerText = d.loginH;
+            document.getElementById('loginSubmit').innerText = d.loginB;
+            document.getElementById('portalTitle').innerText = lang === 'en' ? "WORKSPACE" : "مساحة العمل";
+            document.getElementById('logoutBtn').innerText = d.logoutB;
+            document.getElementById('sendBtn').innerText = d.sendB;
+        }
+
+        if(id === 'navLoginBtn' || id === 'heroBtn') {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        if(id === 'closeLoginBtn') {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        if(id === 'logoutBtn') {
+            location.reload();
+        }
+
+        if(id === 'menuBtn') {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        if(id === 'loginSubmit') {
+            const u = document.getElementById('username').value.trim();
+            const p = document.getElementById('password').value;
+            if(!u) return;
+            currentUser = u;
+            isAdmin = (u === "admin" && p === "admin");
+            document.getElementById('landing-ui').style.display = 'none';
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('portal-ui').style.display = 'flex';
+            if(isAdmin) {
+                document.getElementById('sidebar').style.display = 'flex';
+                document.getElementById('menuBtn').style.display = 'block';
+                listenToAll();
+            } else {
+                selectedUser = currentUser;
+                listenToChat(currentUser);
+            }
+        }
+
+        if(id === 'sendBtn') {
+            const input = document.getElementById('msgInput');
+            if(!input.value.trim() || !selectedUser) return;
+            push(ref(db, 'chats/' + selectedUser), { sender: isAdmin ? 'admin' : 'client', text: input.value, read: false, time: Date.now() });
+            input.value = "";
+        }
+
+        if(e.target.classList.contains('del-chat')) {
+            const u = e.target.dataset.user;
+            if(confirm(`Delete ${u}?`)) remove(ref(db, 'chats/' + u));
+        }
+
+        if(e.target.closest('.user-tab') && !e.target.classList.contains('del-chat')) {
+            const tab = e.target.closest('.user-tab');
+            selectedUser = tab.dataset.user;
+            listenToChat(selectedUser);
             listenToAll();
-        } else {
-            selectedUser = currentUser;
-            listenToChat(currentUser);
+            document.getElementById('sidebar').classList.remove('open');
         }
     });
 
@@ -191,16 +204,8 @@
             if(data) Object.keys(data).forEach(user => {
                 const div = document.createElement('div');
                 div.className = `user-tab ${selectedUser === user ? 'active' : ''}`;
+                div.dataset.user = user;
                 div.innerHTML = `<span>${user}</span> <i class="fas fa-trash del-chat" data-user="${user}"></i>`;
-                div.addEventListener('click', (e) => {
-                    if(!e.target.classList.contains('del-chat')) {
-                        selectedUser = user; listenToChat(user); listenToAll();
-                        document.getElementById('sidebar').classList.remove('open');
-                    } else {
-                        const u = e.target.getAttribute('data-user');
-                        if(confirm(`Delete ${u}?`)) remove(ref(db, 'chats/' + u));
-                    }
-                });
                 list.appendChild(div);
             });
         });
@@ -212,38 +217,20 @@
             display.innerHTML = "";
             const messages = snap.val();
             if(messages) Object.keys(messages).forEach(key => {
-                if(key === 'typing') {
-                    document.getElementById('typing-indicator').style.display = (messages[key] && messages[key] !== (isAdmin?'admin':'client')) ? 'block' : 'none';
-                    return;
-                }
                 const m = messages[key];
-                const div = document.createElement('div');
-                div.className = `bubble ${m.sender}`;
-                div.innerHTML = `${m.text} <div style="font-size:0.6rem; opacity:0.4; text-align:right;">${m.read ? '✓✓' : '✓'}</div>`;
-                display.appendChild(div);
-                if(isAdmin && !m.read) update(ref(db, `chats/${user}/${key}`), { read: true });
+                if(m.text) {
+                    const div = document.createElement('div');
+                    div.className = `bubble ${m.sender}`;
+                    div.innerHTML = `${m.text} <div style="font-size:0.6rem; opacity:0.3; text-align:right;">${m.read ? '✓✓' : '✓'}</div>`;
+                    display.appendChild(div);
+                    if(isAdmin && !m.read) update(ref(db, `chats/${user}/${key}`), { read: true });
+                }
             });
             display.scrollTop = display.scrollHeight;
         });
     }
 
-    document.getElementById('sendBtn').addEventListener('click', () => {
-        const input = document.getElementById('msgInput');
-        if(!input.value.trim() || !selectedUser) return;
-        push(ref(db, 'chats/' + selectedUser), { sender: isAdmin ? 'admin' : 'client', text: input.value, read: false, time: Date.now() });
-        set(ref(db, `chats/${selectedUser}/typing`), false);
-        input.value = "";
-    });
-
-    document.getElementById('msgInput').addEventListener('input', () => {
-        if(selectedUser) {
-            set(ref(db, `chats/${selectedUser}/typing`), isAdmin ? 'admin' : 'client');
-            setTimeout(() => set(ref(db, `chats/${selectedUser}/typing`), false), 3000);
-        }
-    });
-
-    window.onload = () => setTimeout(() => document.getElementById('loader').style.opacity = '0', 1000);
+    window.onload = () => setTimeout(() => document.getElementById('loader').style.display = 'none', 1000);
 </script>
 </body>
-            </html>
-    
+</html>
